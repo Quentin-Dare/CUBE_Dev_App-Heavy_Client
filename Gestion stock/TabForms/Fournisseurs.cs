@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace Gestion_stock.Forms
 {
-    public partial class Clients : Form
+    public partial class Fournisseurs : Form
     {
-        public Clients()
+        public Fournisseurs()
         {
             InitializeComponent();
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
         }
     }
 }

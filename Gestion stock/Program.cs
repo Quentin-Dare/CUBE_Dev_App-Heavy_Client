@@ -1,3 +1,5 @@
+using Gestion_stock.MainForm;
+
 namespace Gestion_stock
 {
     internal static class Program
@@ -8,10 +10,17 @@ namespace Gestion_stock
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Vin());
+            // Initialisation du projet
+            if (InitializeProject()) 
+            {
+                ApplicationConfiguration.Initialize();
+                Application.Run(new Login());
+            }
+        }
+
+        private static bool InitializeProject()
+        {
+            return Utils.CustomFont.LoadFonts();
         }
     }
 }

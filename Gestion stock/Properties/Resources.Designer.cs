@@ -93,6 +93,16 @@ namespace Gestion_stock.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap login_img {
+            get {
+                object obj = ResourceManager.GetObject("login_img", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tableau_de_bord {
             get {
                 object obj = ResourceManager.GetObject("tableau-de-bord", resourceCulture);

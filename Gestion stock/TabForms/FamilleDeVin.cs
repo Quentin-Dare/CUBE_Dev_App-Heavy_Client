@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace Gestion_stock.Forms
 {
-    public partial class Articles : Form
+    public partial class FamilleDeVin : Form
     {
-        public Articles()
+        public FamilleDeVin()
         {
             InitializeComponent();
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
         }
     }
 }

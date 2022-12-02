@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace Gestion_stock.Forms
 {
-    public partial class Fournisseurs : Form
+    public partial class Parametres : Form
     {
-        public Fournisseurs()
+        public Parametres()
         {
             InitializeComponent();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
         }
     }
 }

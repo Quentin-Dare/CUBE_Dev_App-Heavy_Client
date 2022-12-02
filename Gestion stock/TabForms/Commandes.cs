@@ -15,6 +15,8 @@ namespace Gestion_stock.Forms
         public Commandes()
         {
             InitializeComponent();
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
         }
     }
 }
