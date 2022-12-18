@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.Control;
+﻿using static System.Windows.Forms.Control;
 
 namespace Gestion_stock.Utils
 {
@@ -19,6 +14,10 @@ namespace Gestion_stock.Utils
             //object properties = this.dgvData.GetType().GetProperties().Where(p => p.PropertyType == typeof(Color)).Where(p => p.PropertyType == typeof(Color));
         }
 
+        /// <summary>
+        /// Changement des polices d'écriture de Segoe UI en Open Sans et de Times New Roman en Abril Fatface
+        /// </summary>
+        /// <param name="controls"></param>
         private static void ChangeFont(ControlCollection controls)
         {
             foreach (Control c in controls)
@@ -27,11 +26,6 @@ namespace Gestion_stock.Utils
                 if (c.Controls.Count != 0)
                 {
                     ChangeFont(c.Controls);
-                }
-
-                if (c.Name == "testLabel")
-                {
-                    Font font = c.Font;
                 }
 
                 // Changement de la font family Segoe UI en Open Sans

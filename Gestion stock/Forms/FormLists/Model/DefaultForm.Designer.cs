@@ -1,6 +1,4 @@
-﻿using System.Security.Policy;
-
-namespace Gestion_stock.Forms
+﻿namespace Gestion_stock.Forms.FormLists.Model
 {
     partial class DefaultForm
     {
@@ -32,7 +30,7 @@ namespace Gestion_stock.Forms
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgvData = new System.Windows.Forms.DataGridView();
+            this.dgvMainTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbFormTitle = new System.Windows.Forms.Label();
             this.btnAddItem = new System.Windows.Forms.Button();
@@ -42,28 +40,30 @@ namespace Gestion_stock.Forms
             this.cbFieldFilter = new System.Windows.Forms.ComboBox();
             this.tlpContainerAll = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableContainer = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMainTable)).BeginInit();
             this.tlpFilterContainer.SuspendLayout();
             this.tlpContainerAll.SuspendLayout();
             this.pnlTableContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvData
+            // dgvMainTable
             // 
-            this.dgvData.AllowUserToOrderColumns = true;
-            this.dgvData.AllowUserToResizeRows = false;
-            this.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMainTable.AllowUserToOrderColumns = true;
+            this.dgvMainTable.AllowUserToResizeRows = false;
+            this.dgvMainTable.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.dgvMainTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMainTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvMainTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvMainTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMainTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -72,16 +72,17 @@ namespace Gestion_stock.Forms
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(4)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvData.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvData.EnableHeadersVisualStyles = false;
-            this.dgvData.Location = new System.Drawing.Point(0, 0);
-            this.dgvData.Margin = new System.Windows.Forms.Padding(0);
-            this.dgvData.Name = "dgvData";
-            this.dgvData.RowHeadersVisible = false;
-            this.dgvData.RowTemplate.Height = 30;
-            this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvData.Size = new System.Drawing.Size(316, 150);
-            this.dgvData.TabIndex = 0;
+            this.dgvMainTable.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvMainTable.EnableHeadersVisualStyles = false;
+            this.dgvMainTable.Location = new System.Drawing.Point(0, 0);
+            this.dgvMainTable.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvMainTable.Name = "dgvMainTable";
+            this.dgvMainTable.RowHeadersVisible = false;
+            this.dgvMainTable.RowTemplate.Height = 30;
+            this.dgvMainTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMainTable.Size = new System.Drawing.Size(316, 150);
+            this.dgvMainTable.TabIndex = 0;
+            this.dgvMainTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellClicked);
             // 
             // Column1
             // 
@@ -94,32 +95,31 @@ namespace Gestion_stock.Forms
             this.lbFormTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbFormTitle.AutoEllipsis = true;
+            this.lbFormTitle.AutoSize = true;
             this.lbFormTitle.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(4)))), ((int)(((byte)(0)))));
-            this.lbFormTitle.Location = new System.Drawing.Point(50, 67);
+            this.lbFormTitle.Location = new System.Drawing.Point(50, 70);
             this.lbFormTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lbFormTitle.Name = "lbFormTitle";
-            this.lbFormTitle.Size = new System.Drawing.Size(847, 51);
+            this.lbFormTitle.Size = new System.Drawing.Size(900, 51);
             this.lbFormTitle.TabIndex = 0;
             this.lbFormTitle.Text = "Form par défaut";
             // 
             // btnAddItem
             // 
             this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddItem.AutoSize = true;
-            this.btnAddItem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnAddItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddItem.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddItem.ForeColor = System.Drawing.Color.White;
-            this.btnAddItem.Location = new System.Drawing.Point(728, 20);
+            this.btnAddItem.Location = new System.Drawing.Point(780, 20);
             this.btnAddItem.Margin = new System.Windows.Forms.Padding(0);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Padding = new System.Windows.Forms.Padding(15, 8, 15, 8);
-            this.btnAddItem.Size = new System.Drawing.Size(169, 47);
+            this.btnAddItem.Size = new System.Drawing.Size(170, 50);
             this.btnAddItem.TabIndex = 0;
             this.btnAddItem.TabStop = false;
             this.btnAddItem.Text = "Ajouter un article";
             this.btnAddItem.UseVisualStyleBackColor = false;
+            this.btnAddItem.Click += new System.EventHandler(this.BtnAddClicked);
             // 
             // tlpFilterContainer
             // 
@@ -133,13 +133,14 @@ namespace Gestion_stock.Forms
             this.tlpFilterContainer.Controls.Add(this.tbFilter, 2, 0);
             this.tlpFilterContainer.Controls.Add(this.lbContient, 1, 0);
             this.tlpFilterContainer.Controls.Add(this.cbFieldFilter, 0, 0);
-            this.tlpFilterContainer.Location = new System.Drawing.Point(445, 138);
+            this.tlpFilterContainer.Location = new System.Drawing.Point(498, 141);
             this.tlpFilterContainer.Margin = new System.Windows.Forms.Padding(0, 20, 0, 10);
             this.tlpFilterContainer.Name = "tlpFilterContainer";
             this.tlpFilterContainer.RowCount = 1;
             this.tlpFilterContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFilterContainer.Size = new System.Drawing.Size(452, 28);
+            this.tlpFilterContainer.Size = new System.Drawing.Size(452, 1);
             this.tlpFilterContainer.TabIndex = 2;
+            this.tlpFilterContainer.Visible = false;
             // 
             // tbFilter
             // 
@@ -150,15 +151,16 @@ namespace Gestion_stock.Forms
             this.tbFilter.Name = "tbFilter";
             this.tbFilter.Size = new System.Drawing.Size(200, 27);
             this.tbFilter.TabIndex = 2;
+            this.tbFilter.TextChanged += new System.EventHandler(this.FilterData);
             // 
             // lbContient
             // 
             this.lbContient.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbContient.AutoSize = true;
             this.lbContient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbContient.Location = new System.Drawing.Point(173, 3);
+            this.lbContient.Location = new System.Drawing.Point(173, 0);
             this.lbContient.Name = "lbContient";
-            this.lbContient.Size = new System.Drawing.Size(76, 21);
+            this.lbContient.Size = new System.Drawing.Size(76, 1);
             this.lbContient.TabIndex = 1;
             this.lbContient.Text = "Contient :";
             // 
@@ -178,6 +180,7 @@ namespace Gestion_stock.Forms
             this.cbFieldFilter.Name = "cbFieldFilter";
             this.cbFieldFilter.Size = new System.Drawing.Size(170, 28);
             this.cbFieldFilter.TabIndex = 1;
+            this.cbFieldFilter.SelectedIndexChanged += new System.EventHandler(this.FilterData);
             // 
             // tlpContainerAll
             // 
@@ -195,11 +198,11 @@ namespace Gestion_stock.Forms
             this.tlpContainerAll.Name = "tlpContainerAll";
             this.tlpContainerAll.Padding = new System.Windows.Forms.Padding(50, 20, 50, 20);
             this.tlpContainerAll.RowCount = 4;
+            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContainerAll.Size = new System.Drawing.Size(947, 647);
+            this.tlpContainerAll.Size = new System.Drawing.Size(1000, 647);
             this.tlpContainerAll.TabIndex = 4;
             // 
             // pnlTableContainer
@@ -209,11 +212,11 @@ namespace Gestion_stock.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTableContainer.AutoScroll = true;
             this.pnlTableContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.pnlTableContainer.Controls.Add(this.dgvData);
-            this.pnlTableContainer.Location = new System.Drawing.Point(50, 176);
+            this.pnlTableContainer.Controls.Add(this.dgvMainTable);
+            this.pnlTableContainer.Location = new System.Drawing.Point(50, 141);
             this.pnlTableContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTableContainer.Name = "pnlTableContainer";
-            this.pnlTableContainer.Size = new System.Drawing.Size(847, 451);
+            this.pnlTableContainer.Size = new System.Drawing.Size(900, 486);
             this.pnlTableContainer.TabIndex = 5;
             // 
             // DefaultForm
@@ -222,12 +225,12 @@ namespace Gestion_stock.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(947, 647);
+            this.ClientSize = new System.Drawing.Size(1000, 647);
             this.Controls.Add(this.tlpContainerAll);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DefaultForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMainTable)).EndInit();
             this.tlpFilterContainer.ResumeLayout(false);
             this.tlpFilterContainer.PerformLayout();
             this.tlpContainerAll.ResumeLayout(false);
@@ -248,7 +251,7 @@ namespace Gestion_stock.Forms
         private ComboBox cbFieldFilter;
         private TableLayoutPanel tlpContainerAll;
         private Panel pnlTableContainer;
-        private DataGridView dgvData;
+        private DataGridView dgvMainTable;
         private DataGridViewTextBoxColumn Column1;
     }
 }

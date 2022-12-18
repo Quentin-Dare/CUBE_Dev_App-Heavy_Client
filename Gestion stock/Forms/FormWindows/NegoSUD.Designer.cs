@@ -136,6 +136,7 @@
             this.lbParametres.TabIndex = 6;
             this.lbParametres.Text = "Paramètres";
             this.lbParametres.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbParametres.Visible = false;
             this.lbParametres.Click += new System.EventHandler(this.lbParametres_Click);
             this.lbParametres.MouseEnter += new System.EventHandler(this.OnMouseEnterRed);
             this.lbParametres.MouseLeave += new System.EventHandler(this.OnMouseLeaveRed);
@@ -327,8 +328,8 @@
             this.pnlOpenMenu.TabIndex = 0;
             this.pnlOpenMenu.Visible = false;
             this.pnlOpenMenu.Click += new System.EventHandler(this.pnlOpenMenu_Click);
-            this.pnlOpenMenu.MouseEnter += new System.EventHandler(this.OnMouseEnterGrayBackground);
-            this.pnlOpenMenu.MouseLeave += new System.EventHandler(this.OnMouseLeaveGrayBackground);
+            this.pnlOpenMenu.MouseEnter += new System.EventHandler(this.OnMouseEnterOpenMenuBtn);
+            this.pnlOpenMenu.MouseLeave += new System.EventHandler(this.OnMouseLeaveOpenMenuBtn);
             // 
             // menuBar2
             // 
@@ -340,6 +341,8 @@
             this.menuBar2.Size = new System.Drawing.Size(30, 2);
             this.menuBar2.TabIndex = 2;
             this.menuBar2.Click += new System.EventHandler(this.pnlOpenMenu_Click);
+            this.menuBar2.MouseEnter += new System.EventHandler(this.OnMouseEnterOpenMenuBtn);
+            this.menuBar2.MouseLeave += new System.EventHandler(this.OnMouseLeaveOpenMenuBtn);
             // 
             // menuBar3
             // 
@@ -351,6 +354,8 @@
             this.menuBar3.Size = new System.Drawing.Size(30, 2);
             this.menuBar3.TabIndex = 1;
             this.menuBar3.Click += new System.EventHandler(this.pnlOpenMenu_Click);
+            this.menuBar3.MouseEnter += new System.EventHandler(this.OnMouseEnterOpenMenuBtn);
+            this.menuBar3.MouseLeave += new System.EventHandler(this.OnMouseLeaveOpenMenuBtn);
             // 
             // menuBar1
             // 
@@ -362,6 +367,8 @@
             this.menuBar1.Size = new System.Drawing.Size(30, 2);
             this.menuBar1.TabIndex = 0;
             this.menuBar1.Click += new System.EventHandler(this.pnlOpenMenu_Click);
+            this.menuBar1.MouseEnter += new System.EventHandler(this.OnMouseEnterOpenMenuBtn);
+            this.menuBar1.MouseLeave += new System.EventHandler(this.OnMouseLeaveOpenMenuBtn);
             // 
             // pnlFLPContainer
             // 

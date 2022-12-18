@@ -1,7 +1,8 @@
-using Gestion_stock.TabForms;
-using Gestion_stock.TabForms.DefaultForms;
 using Gestion_stock.Utils;
 using Gestion_stock.Utils.CustomControls;
+using Gestion_stock.NegosudData.Interfaces;
+using Gestion_stock.Forms.FormLists;
+using Gestion_stock.Forms.FormIndividual;
 
 namespace Gestion_stock
 {
@@ -72,16 +73,18 @@ namespace Gestion_stock
         {
             CustomEvents.OnMouseLeaveDarkRed(sender);
         }
-        private void OnMouseEnterGrayBackground(object sender, EventArgs e)
+        private void OnMouseEnterOpenMenuBtn(object sender, EventArgs e)
         {
-            CustomEvents.OnMouseEnterGrayBackground(sender);
+            CustomEvents.OnMouseEnterGrayBackground(this.pnlOpenMenu);
         }
-        private void OnMouseLeaveGrayBackground(object sender, EventArgs e)
+        private void OnMouseLeaveOpenMenuBtn(object sender, EventArgs e)
         {
-            CustomEvents.OnMouseLeaveGrayBackground(sender);
+            CustomEvents.OnMouseLeaveGrayBackground(this.pnlOpenMenu);
         }
 
         #endregion
+
+        #region Manage Tabs
 
         /// <summary>
         /// Ajoute un onglet où sélectionne celui-ci s'il existe déjà
@@ -219,34 +222,36 @@ namespace Gestion_stock
             }
         }
 
+        #endregion
+
         private void lbArticles_Click(object sender, EventArgs e)
         {
-            AddTabForce(new Articles());
+            AddTabIfNotExists(new Articles());
         }
 
         private void lbCmdClients_Click(object sender, EventArgs e)
         {
-            //AddTabIfNotExists("Commandes clients", "CmdClients", new Articles());
+            AddTabIfNotExists(new CommandesClient());
         }
 
         private void lbCmdFournisseurs_Click(object sender, EventArgs e)
         {
-            //AddTabIfNotExists("Commandes fournisseurs", "CmdFournisseurs", new Commandes());
+            AddTabIfNotExists(new CommandesFournisseur());
         }
 
         private void lbClients_Click(object sender, EventArgs e)
         {
-            //AddTabIfNotExists("Clients", "Clients", new Clients());
+            AddTabIfNotExists(new Clients());
         }
 
         private void lbFournisseurs_Click(object sender, EventArgs e)
         {
-            //AddTabIfNotExists("Fournisseurs", "Fournisseurs", new Fournisseurs());
+            AddTabIfNotExists(new Fournisseurs());
         }
 
         private void lbFamillesVin_Click(object sender, EventArgs e)
         {
-            //AddTabIfNotExists("Familles de vin", "FamillesDeVin", new FamilleDeVin());
+            AddTabIfNotExists(new FamillesDeVin());
         }
 
         private void lbParametres_Click(object sender, EventArgs e)

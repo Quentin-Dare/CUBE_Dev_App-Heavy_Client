@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gestion_stock.Utils
+﻿namespace Gestion_stock.Utils
 {
     public static class CustomEvents
     {
@@ -59,5 +53,42 @@ namespace Gestion_stock.Utils
 
         #endregion
 
+        #region Text events
+
+        /// <summary>
+        /// Filtre uniquement les nombres entiers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void FilterIntegers(object? sender, KeyPressEventArgs e)
+        {
+            // Source : https://stackoverflow.com/questions/463299/how-do-i-make-a-textbox-that-only-accepts-numbers
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Filtre uniquement les nombres décimaux
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void FilterDecimals(object? sender, KeyPressEventArgs e)
+        {
+            // Source : https://stackoverflow.com/questions/463299/how-do-i-make-a-textbox-that-only-accepts-numbers
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && sender is TextBox textBox && (textBox.Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Gestion_stock.TabForms.DefaultForms
+﻿namespace Gestion_stock.NegosudData.Interfaces
 {
     public interface IPageNegosud
     {

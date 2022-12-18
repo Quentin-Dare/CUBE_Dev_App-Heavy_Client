@@ -9,6 +9,7 @@ namespace Gestion_stock.MainForm
         {
             InitializeComponent();
             Initialize.Design(this);
+            this.AutoScaleMode = AutoScaleMode.Font;
         }
 
         #region Events
