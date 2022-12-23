@@ -1,11 +1,8 @@
-﻿using Gestion_stock.Forms.FormLists.Model;
-using Gestion_stock.NegosudData;
+﻿using Gestion_stock.NegosudData;
 using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using Gestion_stock.Utils.CustomControls;
 using System.Data;
-using System.Drawing.Text;
-using System.Windows.Forms;
 
 namespace Gestion_stock.Forms.FormIndividual
 {

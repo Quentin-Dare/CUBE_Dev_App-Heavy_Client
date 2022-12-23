@@ -404,7 +404,7 @@
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpContainerAll.Size = new System.Drawing.Size(1268, 475);
+            this.tlpContainerAll.Size = new System.Drawing.Size(1268, 455);
             this.tlpContainerAll.TabIndex = 14;
             // 
             // pnlTableContainer
@@ -417,7 +417,7 @@
             this.pnlTableContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.pnlTableContainer.Controls.Add(this.dgvPanier);
             this.pnlTableContainer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnlTableContainer.Location = new System.Drawing.Point(50, 405);
+            this.pnlTableContainer.Location = new System.Drawing.Point(50, 385);
             this.pnlTableContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTableContainer.MinimumSize = new System.Drawing.Size(50, 0);
             this.pnlTableContainer.Name = "pnlTableContainer";
@@ -543,8 +543,8 @@
             this.tlpFilterContainer.Controls.Add(this.tbFilter, 2, 0);
             this.tlpFilterContainer.Controls.Add(this.lbContient, 1, 0);
             this.tlpFilterContainer.Controls.Add(this.cbFieldFilter, 0, 0);
-            this.tlpFilterContainer.Location = new System.Drawing.Point(770, 367);
-            this.tlpFilterContainer.Margin = new System.Windows.Forms.Padding(0, 20, 0, 10);
+            this.tlpFilterContainer.Location = new System.Drawing.Point(770, 347);
+            this.tlpFilterContainer.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.tlpFilterContainer.Name = "tlpFilterContainer";
             this.tlpFilterContainer.RowCount = 1;
             this.tlpFilterContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));

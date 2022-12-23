@@ -273,8 +273,10 @@ namespace Gestion_stock.Forms.FormIndividual
         {
             IEnumerable<PageInfo> enteteData =
             from commandesFournisseur in Tables.CommandesFournisseur.AsEnumerable()
+
             join fournisseurs in Tables.Fournisseurs.AsEnumerable()
                 on commandesFournisseur["IDFournisseur"] equals fournisseurs["IDFournisseur"]
+
             where IDCommande == (string)commandesFournisseur["IDCommandeFournisseur"]
             select new PageInfo
             {

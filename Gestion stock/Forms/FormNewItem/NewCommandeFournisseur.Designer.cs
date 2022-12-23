@@ -29,8 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbFormTitle = new System.Windows.Forms.Label();
             this.flpButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
@@ -50,22 +53,16 @@
             this.pnlTableContainer = new System.Windows.Forms.Panel();
             this.dgvPanier = new System.Windows.Forms.DataGridView();
             this.IDArticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Année = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reference = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Nom = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Annee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrixAchat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalTTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tlpFilterContainer = new System.Windows.Forms.TableLayoutPanel();
-            this.tbFilter = new System.Windows.Forms.TextBox();
-            this.lbContient = new System.Windows.Forms.Label();
-            this.cbFieldFilter = new System.Windows.Forms.ComboBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.PrixTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlContainerBtnRows = new System.Windows.Forms.Panel();
+            this.btnDeleteLine = new System.Windows.Forms.Button();
             this.btnAddLine = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.flpButtons.SuspendLayout();
             this.tlpContainerData.SuspendLayout();
             this.pnlRightData.SuspendLayout();
@@ -73,10 +70,8 @@
             this.tlpContainerAll.SuspendLayout();
             this.pnlTableContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPanier)).BeginInit();
-            this.tlpFilterContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.pnlContainerBtnRows.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lbFormTitle
@@ -90,7 +85,7 @@
             this.lbFormTitle.Location = new System.Drawing.Point(50, 70);
             this.lbFormTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lbFormTitle.Name = "lbFormTitle";
-            this.lbFormTitle.Size = new System.Drawing.Size(1168, 51);
+            this.lbFormTitle.Size = new System.Drawing.Size(896, 51);
             this.lbFormTitle.TabIndex = 0;
             this.lbFormTitle.Text = "Nouvelle commande";
             // 
@@ -105,7 +100,7 @@
             this.flpButtons.Location = new System.Drawing.Point(50, 20);
             this.flpButtons.Margin = new System.Windows.Forms.Padding(0);
             this.flpButtons.Name = "flpButtons";
-            this.flpButtons.Size = new System.Drawing.Size(1168, 50);
+            this.flpButtons.Size = new System.Drawing.Size(896, 50);
             this.flpButtons.TabIndex = 6;
             this.flpButtons.WrapContents = false;
             // 
@@ -115,7 +110,7 @@
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(998, 0);
+            this.btnSave.Location = new System.Drawing.Point(726, 0);
             this.btnSave.Margin = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(170, 50);
@@ -123,6 +118,7 @@
             this.btnSave.TabStop = false;
             this.btnSave.Text = "Sauvegarder";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.SavePage);
             // 
             // btnReload
             // 
@@ -130,7 +126,7 @@
             this.btnReload.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReload.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnReload.ForeColor = System.Drawing.Color.Black;
-            this.btnReload.Location = new System.Drawing.Point(813, 0);
+            this.btnReload.Location = new System.Drawing.Point(541, 0);
             this.btnReload.Margin = new System.Windows.Forms.Padding(0);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(170, 50);
@@ -138,6 +134,7 @@
             this.btnReload.TabStop = false;
             this.btnReload.Text = "Rafraîchir";
             this.btnReload.UseVisualStyleBackColor = false;
+            this.btnReload.Click += new System.EventHandler(this.ReloadPage);
             // 
             // tlpContainerData
             // 
@@ -155,7 +152,7 @@
             this.tlpContainerData.Name = "tlpContainerData";
             this.tlpContainerData.RowCount = 1;
             this.tlpContainerData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContainerData.Size = new System.Drawing.Size(1168, 100);
+            this.tlpContainerData.Size = new System.Drawing.Size(896, 100);
             this.tlpContainerData.TabIndex = 13;
             // 
             // pnlRightData
@@ -169,7 +166,7 @@
             this.pnlRightData.Controls.Add(this.txtTotalTTC);
             this.pnlRightData.Controls.Add(this.lbCoutTransport);
             this.pnlRightData.Controls.Add(this.lbPrixTTC);
-            this.pnlRightData.Location = new System.Drawing.Point(918, 0);
+            this.pnlRightData.Location = new System.Drawing.Point(646, 0);
             this.pnlRightData.Margin = new System.Windows.Forms.Padding(0);
             this.pnlRightData.Name = "pnlRightData";
             this.pnlRightData.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -182,7 +179,6 @@
             this.txtCoutTransport.Location = new System.Drawing.Point(154, 7);
             this.txtCoutTransport.Margin = new System.Windows.Forms.Padding(0);
             this.txtCoutTransport.Name = "txtCoutTransport";
-            this.txtCoutTransport.ReadOnly = true;
             this.txtCoutTransport.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtCoutTransport.Size = new System.Drawing.Size(96, 24);
             this.txtCoutTransport.TabIndex = 1;
@@ -232,7 +228,7 @@
             this.pnlLeftData.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLeftData.Name = "pnlLeftData";
             this.pnlLeftData.Padding = new System.Windows.Forms.Padding(0, 0, 20, 20);
-            this.pnlLeftData.Size = new System.Drawing.Size(918, 100);
+            this.pnlLeftData.Size = new System.Drawing.Size(646, 100);
             this.pnlLeftData.TabIndex = 0;
             // 
             // txtFournisseur
@@ -243,6 +239,7 @@
             this.txtFournisseur.Name = "txtFournisseur";
             this.txtFournisseur.Size = new System.Drawing.Size(282, 25);
             this.txtFournisseur.TabIndex = 26;
+            this.txtFournisseur.SelectedIndexChanged += new System.EventHandler(this.FournisseurChanged);
             // 
             // lbNomFournisseur
             // 
@@ -274,17 +271,16 @@
             // 
             // tlpContainerAll
             // 
-            this.tlpContainerAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tlpContainerAll.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpContainerAll.AutoSize = true;
-            this.tlpContainerAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tlpContainerAll.ColumnCount = 1;
             this.tlpContainerAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContainerAll.Controls.Add(this.tableLayoutPanel1, 0, 5);
             this.tlpContainerAll.Controls.Add(this.pnlTableContainer, 0, 7);
             this.tlpContainerAll.Controls.Add(this.flpButtons, 0, 0);
             this.tlpContainerAll.Controls.Add(this.tlpContainerData, 0, 3);
             this.tlpContainerAll.Controls.Add(this.lbFormTitle, 0, 1);
+            this.tlpContainerAll.Controls.Add(this.pnlContainerBtnRows, 0, 5);
             this.tlpContainerAll.Location = new System.Drawing.Point(0, 0);
             this.tlpContainerAll.Margin = new System.Windows.Forms.Padding(0);
             this.tlpContainerAll.Name = "tlpContainerAll";
@@ -296,9 +292,9 @@
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContainerAll.Size = new System.Drawing.Size(1268, 715);
+            this.tlpContainerAll.Size = new System.Drawing.Size(996, 580);
             this.tlpContainerAll.TabIndex = 14;
             // 
             // pnlTableContainer
@@ -306,62 +302,57 @@
             this.pnlTableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTableContainer.AutoSize = true;
-            this.pnlTableContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlTableContainer.AutoScroll = true;
             this.pnlTableContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.pnlTableContainer.Controls.Add(this.dgvPanier);
             this.pnlTableContainer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnlTableContainer.Location = new System.Drawing.Point(50, 317);
+            this.pnlTableContainer.Location = new System.Drawing.Point(50, 309);
             this.pnlTableContainer.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlTableContainer.MinimumSize = new System.Drawing.Size(50, 0);
             this.pnlTableContainer.Name = "pnlTableContainer";
-            this.pnlTableContainer.Size = new System.Drawing.Size(1168, 378);
+            this.pnlTableContainer.Size = new System.Drawing.Size(896, 251);
             this.pnlTableContainer.TabIndex = 16;
             // 
             // dgvPanier
             // 
+            this.dgvPanier.AllowUserToAddRows = false;
+            this.dgvPanier.AllowUserToDeleteRows = false;
             this.dgvPanier.AllowUserToOrderColumns = true;
             this.dgvPanier.AllowUserToResizeRows = false;
+            this.dgvPanier.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPanier.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.dgvPanier.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPanier.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPanier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPanier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPanier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPanier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDArticle,
             this.Reference,
             this.Nom,
-            this.Année,
+            this.Annee,
             this.PrixAchat,
-            this.TVA,
             this.Quantite,
-            this.TotalTTC});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPanier.DefaultCellStyle = dataGridViewCellStyle8;
+            this.PrixTotal});
             this.dgvPanier.EnableHeadersVisualStyles = false;
             this.dgvPanier.Location = new System.Drawing.Point(0, 0);
             this.dgvPanier.Margin = new System.Windows.Forms.Padding(0);
-            this.dgvPanier.MinimumSize = new System.Drawing.Size(1168, 50);
+            this.dgvPanier.MinimumSize = new System.Drawing.Size(0, 50);
             this.dgvPanier.Name = "dgvPanier";
             this.dgvPanier.RowHeadersVisible = false;
             this.dgvPanier.RowTemplate.Height = 30;
-            this.dgvPanier.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dgvPanier.Size = new System.Drawing.Size(1168, 378);
+            this.dgvPanier.Size = new System.Drawing.Size(897, 251);
             this.dgvPanier.TabIndex = 0;
+            this.dgvPanier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ArticlesCellClicked);
+            this.dgvPanier.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.EnterEditingFirstTime);
             // 
             // IDArticle
             // 
@@ -373,115 +364,81 @@
             // 
             this.Reference.HeaderText = "Référence";
             this.Reference.Name = "Reference";
+            this.Reference.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reference.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Nom
             // 
             this.Nom.HeaderText = "Nom";
             this.Nom.Name = "Nom";
+            this.Nom.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Nom.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Nom.Width = 200;
             // 
-            // Année
+            // Annee
             // 
-            this.Année.HeaderText = "Annee";
-            this.Année.Name = "Année";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Annee.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Annee.HeaderText = "Année";
+            this.Annee.Name = "Annee";
+            this.Annee.ReadOnly = true;
             // 
             // PrixAchat
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PrixAchat.DefaultCellStyle = dataGridViewCellStyle3;
             this.PrixAchat.HeaderText = "Prix d\'achat (€)";
             this.PrixAchat.Name = "PrixAchat";
-            // 
-            // TVA
-            // 
-            this.TVA.HeaderText = "TVA (%)";
-            this.TVA.Name = "TVA";
+            this.PrixAchat.ReadOnly = true;
             // 
             // Quantite
             // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Quantite.DefaultCellStyle = dataGridViewCellStyle4;
             this.Quantite.HeaderText = "Quantité";
             this.Quantite.Name = "Quantite";
             // 
-            // TotalTTC
+            // PrixTotal
             // 
-            this.TotalTTC.HeaderText = "Total TTC (€)";
-            this.TotalTTC.Name = "TotalTTC";
-            // 
-            // tlpFilterContainer
-            // 
-            this.tlpFilterContainer.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tlpFilterContainer.AutoSize = true;
-            this.tlpFilterContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tlpFilterContainer.ColumnCount = 3;
-            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tlpFilterContainer.Controls.Add(this.tbFilter, 2, 0);
-            this.tlpFilterContainer.Controls.Add(this.lbContient, 1, 0);
-            this.tlpFilterContainer.Controls.Add(this.cbFieldFilter, 0, 0);
-            this.tlpFilterContainer.Location = new System.Drawing.Point(100, 6);
-            this.tlpFilterContainer.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpFilterContainer.Name = "tlpFilterContainer";
-            this.tlpFilterContainer.RowCount = 1;
-            this.tlpFilterContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFilterContainer.Size = new System.Drawing.Size(448, 28);
-            this.tlpFilterContainer.TabIndex = 15;
-            // 
-            // tbFilter
-            // 
-            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFilter.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbFilter.Location = new System.Drawing.Point(248, 0);
-            this.tbFilter.Margin = new System.Windows.Forms.Padding(0);
-            this.tbFilter.Name = "tbFilter";
-            this.tbFilter.Size = new System.Drawing.Size(200, 27);
-            this.tbFilter.TabIndex = 2;
-            this.tbFilter.TextChanged += new System.EventHandler(this.FilterData);
-            // 
-            // lbContient
-            // 
-            this.lbContient.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lbContient.AutoSize = true;
-            this.lbContient.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbContient.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbContient.Location = new System.Drawing.Point(173, 4);
-            this.lbContient.Name = "lbContient";
-            this.lbContient.Size = new System.Drawing.Size(72, 20);
-            this.lbContient.TabIndex = 1;
-            this.lbContient.Text = "Contient :";
-            // 
-            // cbFieldFilter
-            // 
-            this.cbFieldFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbFieldFilter.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cbFieldFilter.FormattingEnabled = true;
-            this.cbFieldFilter.Items.AddRange(new object[] {
-            "ID",
-            "Nom",
-            "Domaine",
-            "Famille de vin",
-            "Cassoulet"});
-            this.cbFieldFilter.Location = new System.Drawing.Point(0, 0);
-            this.cbFieldFilter.Margin = new System.Windows.Forms.Padding(0);
-            this.cbFieldFilter.Name = "cbFieldFilter";
-            this.cbFieldFilter.Size = new System.Drawing.Size(170, 28);
-            this.cbFieldFilter.TabIndex = 1;
-            this.cbFieldFilter.SelectedIndexChanged += new System.EventHandler(this.FilterData);
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider.ContainerControl = this;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PrixTotal.DefaultCellStyle = dataGridViewCellStyle5;
+            this.PrixTotal.HeaderText = "Prix total (€)";
+            this.PrixTotal.Name = "PrixTotal";
+            this.PrixTotal.ReadOnly = true;
             // 
             // pnlContainerBtnRows
             // 
-            this.pnlContainerBtnRows.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pnlContainerBtnRows.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pnlContainerBtnRows.AutoSize = true;
             this.pnlContainerBtnRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlContainerBtnRows.Controls.Add(this.button1);
+            this.pnlContainerBtnRows.Controls.Add(this.btnDeleteLine);
             this.pnlContainerBtnRows.Controls.Add(this.btnAddLine);
-            this.pnlContainerBtnRows.Location = new System.Drawing.Point(0, 0);
+            this.pnlContainerBtnRows.Location = new System.Drawing.Point(856, 261);
             this.pnlContainerBtnRows.Margin = new System.Windows.Forms.Padding(0);
             this.pnlContainerBtnRows.Name = "pnlContainerBtnRows";
             this.pnlContainerBtnRows.Size = new System.Drawing.Size(90, 40);
             this.pnlContainerBtnRows.TabIndex = 0;
+            this.pnlContainerBtnRows.Visible = false;
+            // 
+            // btnDeleteLine
+            // 
+            this.btnDeleteLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDeleteLine.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteLine.Font = new System.Drawing.Font("Segoe UI Emoji", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteLine.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteLine.Location = new System.Drawing.Point(50, 0);
+            this.btnDeleteLine.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDeleteLine.Name = "btnDeleteLine";
+            this.btnDeleteLine.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.btnDeleteLine.Size = new System.Drawing.Size(40, 40);
+            this.btnDeleteLine.TabIndex = 1;
+            this.btnDeleteLine.Text = "✖";
+            this.btnDeleteLine.UseVisualStyleBackColor = false;
+            this.btnDeleteLine.Click += new System.EventHandler(this.RemoveArticleLine);
             // 
             // btnAddLine
             // 
@@ -496,46 +453,21 @@
             this.btnAddLine.TabIndex = 0;
             this.btnAddLine.Text = "➕";
             this.btnAddLine.UseVisualStyleBackColor = false;
+            this.btnAddLine.Click += new System.EventHandler(this.AddArticleLine);
             // 
-            // button1
+            // errorProvider
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Emoji", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(50, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "✖";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.pnlContainerBtnRows, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tlpFilterContainer, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(667, 264);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(548, 40);
-            this.tableLayoutPanel1.TabIndex = 16;
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
             // 
             // NewCommandeFournisseur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(1268, 718);
+            this.ClientSize = new System.Drawing.Size(996, 580);
             this.Controls.Add(this.tlpContainerAll);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.Gray;
@@ -553,14 +485,9 @@
             this.tlpContainerAll.PerformLayout();
             this.pnlTableContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPanier)).EndInit();
-            this.tlpFilterContainer.ResumeLayout(false);
-            this.tlpFilterContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.pnlContainerBtnRows.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -574,23 +501,11 @@
         private TextBox txtCoutTransport;
         private TextBox txtTotalTTC;
         private ErrorProvider errorProvider;
-        private TableLayoutPanel tlpFilterContainer;
-        private TextBox tbFilter;
-        private Label lbContient;
-        private ComboBox cbFieldFilter;
         private Panel pnlTableContainer;
         private DataGridView dgvPanier;
         private Label lbIDClient;
         private TextBox txtIDFournisseur;
         private Label lbNomFournisseur;
-        private DataGridViewTextBoxColumn IDArticle;
-        private DataGridViewTextBoxColumn Reference;
-        private DataGridViewTextBoxColumn Nom;
-        private DataGridViewTextBoxColumn Année;
-        private DataGridViewTextBoxColumn PrixAchat;
-        private DataGridViewTextBoxColumn TVA;
-        private DataGridViewTextBoxColumn Quantite;
-        private DataGridViewTextBoxColumn TotalTTC;
         private ComboBox txtFournisseur;
         private Button btnSave;
         private Button btnReload;
@@ -598,7 +513,14 @@
         private Label lbPrixTTC;
         private Panel pnlContainerBtnRows;
         private Button btnAddLine;
-        private Button button1;
-        private TableLayoutPanel tableLayoutPanel1;
+        private Button btnDeleteLine;
+        private DataGridViewTextBoxColumn IDArticle;
+        private DataGridViewComboBoxColumn Reference;
+        private DataGridViewComboBoxColumn Nom;
+        private DataGridViewTextBoxColumn Annee;
+        private DataGridViewTextBoxColumn PrixAchat;
+        private DataGridViewTextBoxColumn Quantite;
+        private DataGridViewTextBoxColumn Total;
+        private DataGridViewTextBoxColumn PrixTotal;
     }
 }

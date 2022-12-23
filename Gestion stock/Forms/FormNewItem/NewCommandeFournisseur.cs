@@ -1,7 +1,9 @@
-﻿using Gestion_stock.NegosudData;
+﻿using Gestion_stock.Forms.FormIndividual;
+using Gestion_stock.NegosudData;
 using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Gestion_stock.Forms.FormNewItem
 {
@@ -15,12 +17,15 @@ namespace Gestion_stock.Forms.FormNewItem
 
         // ID et données de la commande
         private PageInfo commande;
-        private List<GridViewInfo> articlesList = new List<GridViewInfo>();
-
-        // Autres données
+        private string? idFournisseur;
+        List<GridViewInfo> gridArticlesListe = new List<GridViewInfo>();
         List<string> idArticles = new List<string>();
 
+        // Autres données
+        int selectedArticle = -1;
+
         List<FournisseurInfo> listeNomFournisseurs = DataUtils.GetSuppliersName();
+        List<object> listeArticles = new List<object>();
 
         #endregion
 
@@ -50,6 +55,7 @@ namespace Gestion_stock.Forms.FormNewItem
             commande = new PageInfo();
 
             FillComboBoxData();
+            AddEvents();
         }
 
         #region Constructor Methods
@@ -62,15 +68,24 @@ namespace Gestion_stock.Forms.FormNewItem
             }
         }
 
+        /// <summary>
+        /// Ajout des évènements custom de la page
+        /// </summary>
+        private void AddEvents()
+        {
+            // Evènements pour filter les textbox de chiffres
+            this.txtCoutTransport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CustomEvents.FilterDecimals);
+        }
+
         #endregion
 
         #endregion
 
         #region Events
 
-        private void ClosePage(object sender, EventArgs e)
+        private void SavePage(object sender, EventArgs e)
         {
-            if (!CustomMethods.ConfirmCloseCommand())
+            if (!CustomMethods.ConfirmDataSave())
             {
                 return;
             }
@@ -88,50 +103,110 @@ namespace Gestion_stock.Forms.FormNewItem
             MessageBox.Show("Bon bah code fdp");
         }
 
-        #endregion
-
-        #region Filtering
-
         /// <summary>
-        /// Tentative de filtrage des données (pas opérationnel)
+        /// Evenement quand le nom du fournisseur a été changé
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FilterData(object sender, EventArgs e)
+        private void FournisseurChanged(object sender, EventArgs e)
         {
-            // Pas de filtre si les 2 champs pour filtrer ne sont pas remplis
-            if (this.cbFieldFilter.SelectedIndex == -1
-                || string.IsNullOrEmpty(this.tbFilter.Text))
+            if (txtFournisseur.SelectedIndex < 0)
             {
-                dgvPanier.DataSource = articlesList;
-                dgvPanier.Refresh();
-                return;
+                idFournisseur = null;
+                this.pnlContainerBtnRows.Visible = false;
+            }
+            else
+            {
+                idFournisseur = listeNomFournisseurs[txtFournisseur.SelectedIndex].IDFournisseur;
+                this.pnlContainerBtnRows.Visible = true;
             }
 
-            string columnToFilter = GetPropertyName();
-            string filter = this.tbFilter.Text;
+            txtIDFournisseur.Text = idFournisseur;
+        }
 
-            // Filtre des données
-            List<GridViewInfo> filteredRows = articlesList.Where(r => r.GetType().GetProperty(columnToFilter).GetValue(r).ToString().Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            dgvPanier.DataSource = filteredRows;
-            dgvPanier.Refresh();
-
+        private void ArticlesCellClicked(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedArticle = e.RowIndex;
         }
 
         /// <summary>
-        /// Retourne la propriété de l'objet à filtrer
+        /// Méthode qui se lance la première fois qu'on édite les valeurs
         /// </summary>
-        /// <param name="defaultForm"></param>
-        /// <returns></returns>
-        private string GetPropertyName()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EnterEditingFirstTime(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            int columnIndex = this.cbFieldFilter.SelectedIndex + 1;
+            if (dgvPanier.CurrentCell.ColumnIndex == dgvPanier.Columns["Quantite"].Index
+                && e.Control is TextBox tb)
+            {
+                string quantiteValue = tb.Text;
+                tb.KeyPress -= new KeyPressEventHandler(CustomEvents.FilterIntegers);
 
-            string columnName = dgvPanier.Columns[columnIndex].Name;
+                tb.KeyPress += new KeyPressEventHandler(CustomEvents.FilterIntegers);
 
-            return columnName;
+                if (quantiteValue == tb.Text)
+                {
+                    CalculTotal(dgvPanier.CurrentCell.RowIndex);
+                }
+            }
         }
+
+        public static void FilterIntegers(object? sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void AddArticleLine(object sender, EventArgs e)
+        {
+            this.dgvPanier.Rows.Add();
+            int lastRowIndex = dgvPanier.Rows.Count - 1;
+            this.dgvPanier.CurrentCell = dgvPanier.Rows[lastRowIndex].Cells[1];
+            selectedArticle = lastRowIndex;
+        }
+
+        private void RemoveArticleLine(object sender, EventArgs e)
+        {
+            if (selectedArticle == -1)
+            {
+                return;
+            }
+
+            this.dgvPanier.Rows.RemoveAt(selectedArticle);
+            selectedArticle = -1;
+        }
+
+        #endregion
+
+        #region Requests
+
+        #endregion
+
+        #region Manage Data
+
+        private void CalculTotal(int rowIndex)
+        {
+            if (dgvPanier.Rows[rowIndex].Cells["PrixAchat"].Value == null
+                || dgvPanier.Rows[rowIndex].Cells["Quantite"].Value == null)
+            {
+                return;
+            }
+
+            try
+            {
+                decimal quantite = Convert.ToInt32(dgvPanier.Rows[rowIndex].Cells["Quantite"].Value);
+                decimal prixAchat = Convert.ToDecimal(dgvPanier.Rows[rowIndex].Cells["PrixAchat"].Value);
+
+                dgvPanier.Rows[rowIndex].Cells["PrixTotal"].Value = quantite * prixAchat;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
 
         #endregion
 
