@@ -63,8 +63,7 @@ namespace Gestion_stock.Utils
                 }
                 else
                 {
-                    MessageBox.Show("Impossible d'atteindre la racine du projet.", "Erreur",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMethods.DisplayError("Impossible d'atteindre la racine du projet.");
                     return false;
                 }
             }
@@ -77,8 +76,7 @@ namespace Gestion_stock.Utils
             }
             catch
             {
-                MessageBox.Show("Erreur lors du chargement des polices d'écriture personnalisées.", "Erreur",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMethods.DisplayError("Erreur lors du chargement des polices d'écriture personnalisées.");
                 return false;
             }
 

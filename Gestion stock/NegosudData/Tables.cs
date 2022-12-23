@@ -10,6 +10,8 @@ namespace Gestion_stock.NegosudData
         public static readonly DataTable Clients = LoadClientsTable();
         public static readonly DataTable CommandesClient = LoadCommandesClients();
         public static readonly DataTable CommandesClientListe = LoadCommandesClientsList();
+        public static readonly DataTable CommandesFournisseur = LoadCommandesFournisseurs();
+        public static readonly DataTable CommandesFournisseurListe = LoadCommandesFournisseursList();
 
         private static DataTable LoadArticlesTable()
         {
@@ -73,15 +75,15 @@ Bref c'est du bon çui-là";
             DataTable clients = new DataTable();
             clients.Columns.Add("IDClient", typeof(string));
             clients.Columns.Add("Nom", typeof(string));
-            clients.Columns.Add("Surname", typeof(string));
-            clients.Columns.Add("Address", typeof(string));
-            clients.Columns.Add("PostalCode", typeof(string));
-            clients.Columns.Add("Town", typeof(string));
+            clients.Columns.Add("Prenom", typeof(string));
+            clients.Columns.Add("Adresse", typeof(string));
+            clients.Columns.Add("CodePostal", typeof(string));
+            clients.Columns.Add("Ville", typeof(string));
             clients.Columns.Add("Email", typeof(string));
 
             clients.Rows.Add("C00001", "Dupont", "Michel", "1 Rue des Palourdes", "34500", "Bruxelles", "m.dupont@gmail.com");
             clients.Rows.Add("C00002", "Dupondt", "Grégoire", "2 Rue des Palourdes", "34540", "bruz", "m.dupondt@gmail.com");
-            clients.Rows.Add("C00002", "Dupond", "François", "3 Rue des Palourdes", "32500", "Bourges", "m.dupond@gmail.com");
+            clients.Rows.Add("C00003", "Dupond", "François", "3 Rue des Palourdes", "32500", "Bourges", "m.dupond@gmail.com");
 
             return clients;
         }
@@ -89,14 +91,14 @@ Bref c'est du bon çui-là";
         private static DataTable LoadCommandesClients()
         {
             DataTable cmdClients = new DataTable();
-            cmdClients.Columns.Add("IDClientCommand", typeof(string));
+            cmdClients.Columns.Add("IDCommandeClient", typeof(string));
             cmdClients.Columns.Add("Statut", typeof(string));
             cmdClients.Columns.Add("DateCommande", typeof(DateTime));
             cmdClients.Columns.Add("IDClient", typeof(string));
 
-            cmdClients.Rows.Add("CmdC00001", "LIVREE", "01/01/2001", "C00001");
-            cmdClients.Rows.Add("CmdC00002", "EN COURS", "05/01/2001", "C00003");
-            cmdClients.Rows.Add("CmdC00003", "LIVREE", "07/01/2001", "C00003");
+            cmdClients.Rows.Add("CmdC00001", "CLOS", "01/01/2001 12:09", "C00001");
+            cmdClients.Rows.Add("CmdC00002", "EN COURS", "05/01/2001 12:09", "C00002");
+            cmdClients.Rows.Add("CmdC00003", "CLOS", "07/01/2001 12:09", "C00002");
 
             return cmdClients;
         }
@@ -104,13 +106,14 @@ Bref c'est du bon çui-là";
         private static DataTable LoadCommandesClientsList()
         {
             DataTable cmdClientsList = new DataTable();
-            cmdClientsList.Columns.Add("IDClientCommand", typeof(string));
+            cmdClientsList.Columns.Add("IDCommandeClient", typeof(string));
             cmdClientsList.Columns.Add("IDArticle", typeof(string));
             cmdClientsList.Columns.Add("Quantite", typeof(int));
 
             cmdClientsList.Rows.Add("CmdC00001", "V00001", 3);
             cmdClientsList.Rows.Add("CmdC00001", "V00002", 3);
             cmdClientsList.Rows.Add("CmdC00001", "V00003", 3);
+            cmdClientsList.Rows.Add("CmdC00001", "V00003", 7);
             cmdClientsList.Rows.Add("CmdC00002", "V00001", 3);
             cmdClientsList.Rows.Add("CmdC00002", "V00002", 4);
             cmdClientsList.Rows.Add("CmdC00002", "V00003", 5);
@@ -122,15 +125,16 @@ Bref c'est du bon çui-là";
         private static DataTable LoadCommandesFournisseurs()
         {
             DataTable cmdFournisseurs = new DataTable();
-            cmdFournisseurs.Columns.Add("IDFournisseurCommand", typeof(string));
+            cmdFournisseurs.Columns.Add("IDCommandeFournisseur", typeof(string));
             cmdFournisseurs.Columns.Add("Statut", typeof(string));
             cmdFournisseurs.Columns.Add("DateCommande", typeof(DateTime));
-            cmdFournisseurs.Columns.Add("TransportCost", typeof(decimal));
-            cmdFournisseurs.Columns.Add("IDSupplier", typeof(string));
+            cmdFournisseurs.Columns.Add("TypeCommande", typeof(string));
+            cmdFournisseurs.Columns.Add("CoutTransport", typeof(decimal));
+            cmdFournisseurs.Columns.Add("IDFournisseur", typeof(string));
 
-            cmdFournisseurs.Rows.Add("CmdF00001", "LIVREE", "01/01/2001", "F00001");
-            cmdFournisseurs.Rows.Add("CmdF00002", "EN COURS", "05/01/2001", "F00002");
-            cmdFournisseurs.Rows.Add("CmdF00002", "LIVREE", "07/01/2001", "F00002");
+            cmdFournisseurs.Rows.Add("CmdF00001", "CLOS", "01/01/2001 12:09", "MANUEL", 12.0, "F00001");
+            cmdFournisseurs.Rows.Add("CmdF00002", "EN COURS", "05/01/2001 12:09", "AUTOMATIQUE", 12.0, "F00002");
+            cmdFournisseurs.Rows.Add("CmdF00003", "CLOS", "07/01/2001 12:09", "MANUEL", 12.0, "F00002");
 
             return cmdFournisseurs;
         }
@@ -138,13 +142,14 @@ Bref c'est du bon çui-là";
         private static DataTable LoadCommandesFournisseursList()
         {
             DataTable cmdClientsList = new DataTable();
-            cmdClientsList.Columns.Add("IDFournisseurCommand", typeof(string));
+            cmdClientsList.Columns.Add("IDCommandeFournisseur", typeof(string));
             cmdClientsList.Columns.Add("IDArticle", typeof(string));
             cmdClientsList.Columns.Add("Quantite", typeof(int));
 
             cmdClientsList.Rows.Add("CmdF00001", "V00001", 3);
             cmdClientsList.Rows.Add("CmdF00002", "V00002", 3);
             cmdClientsList.Rows.Add("CmdF00002", "V00003", 3);
+            cmdClientsList.Rows.Add("CmdF00003", "V00003", 10);
 
             return cmdClientsList;
         }

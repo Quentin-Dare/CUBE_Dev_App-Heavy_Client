@@ -23,7 +23,7 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #endregion
 
-        #region Public variables
+        #region Public Variables
 
         public string FormTitle
         {
@@ -38,7 +38,7 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public NewArticle()
         {
@@ -114,12 +114,12 @@ namespace Gestion_stock.Forms.FormNewItem
 
         private void SavePage(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Etes-vous sûr de vouloir enregistrer ?", "Enregistrement des données", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (!CustomMethods.ConfirmDataSave())
             {
                 return;
             }
 
-            if (ControlData())
+            if (IsDataValid())
             {
                 UpdateValues();
                 MessageBox.Show("Bon bah code fdp");
@@ -128,12 +128,16 @@ namespace Gestion_stock.Forms.FormNewItem
 
         private void ReloadPage(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Recharger la page ? Les données modifiées seront perdue.", "Rafraîchir", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (CustomMethods.ConfirmDataReload())
             {
                 ResetPageInfo();
                 RemoveErrors();
             }
         }
+
+        #endregion
+
+        #region Requests
 
         #endregion
 
@@ -143,7 +147,7 @@ namespace Gestion_stock.Forms.FormNewItem
         /// Contrôle les données de la page et met en erreur les champs non-valides
         /// </summary>
         /// <returns></returns>
-        private bool ControlData()
+        private bool IsDataValid()
         {
             List<Control> controlsToCheck;
             bool isDataValid = true;
@@ -291,7 +295,7 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #endregion
 
-        #region
+        #region Other Methods
 
         private void RemoveErrors()
         {

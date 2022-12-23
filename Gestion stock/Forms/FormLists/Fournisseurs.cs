@@ -31,7 +31,7 @@ namespace Gestion_stock.Forms.FormLists
 
         private ColumnGridDesign[] columnDesign =
         {
-            new ("ID" , 100, 'L'),
+            new ("ID Fournisseur", 150, 'L'),
             new ("Nom" , 300, 'L'),
             new ("Adresse" , 500, 'L'),
             new ("Code postal" , 100, 'L'),
@@ -45,17 +45,17 @@ namespace Gestion_stock.Forms.FormLists
 
         protected override Form GetIndividualPage(string id)
         {
-            return new ArticleIndiv(id);
+            return new FournisseurIndiv(id);
         }
 
         protected override Form GetNewItemForm()
         {
-            return new NewArticle();
+            return new NewFournisseur();
         }
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public Fournisseurs()
         {

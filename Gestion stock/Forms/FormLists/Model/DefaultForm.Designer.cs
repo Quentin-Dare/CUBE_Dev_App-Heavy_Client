@@ -34,15 +34,15 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbFormTitle = new System.Windows.Forms.Label();
             this.btnAddItem = new System.Windows.Forms.Button();
-            this.tlpFilterContainer = new System.Windows.Forms.TableLayoutPanel();
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.lbContient = new System.Windows.Forms.Label();
             this.cbFieldFilter = new System.Windows.Forms.ComboBox();
             this.tlpContainerAll = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpFilterContainer = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableContainer = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMainTable)).BeginInit();
-            this.tlpFilterContainer.SuspendLayout();
             this.tlpContainerAll.SuspendLayout();
+            this.tlpFilterContainer.SuspendLayout();
             this.pnlTableContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +80,7 @@
             this.dgvMainTable.RowHeadersVisible = false;
             this.dgvMainTable.RowTemplate.Height = 30;
             this.dgvMainTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMainTable.Size = new System.Drawing.Size(316, 150);
+            this.dgvMainTable.Size = new System.Drawing.Size(250, 150);
             this.dgvMainTable.TabIndex = 0;
             this.dgvMainTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellClicked);
             // 
@@ -109,6 +109,7 @@
             // 
             this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAddItem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddItem.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddItem.ForeColor = System.Drawing.Color.White;
             this.btnAddItem.Location = new System.Drawing.Point(780, 20);
@@ -121,32 +122,11 @@
             this.btnAddItem.UseVisualStyleBackColor = false;
             this.btnAddItem.Click += new System.EventHandler(this.BtnAddClicked);
             // 
-            // tlpFilterContainer
-            // 
-            this.tlpFilterContainer.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tlpFilterContainer.AutoSize = true;
-            this.tlpFilterContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tlpFilterContainer.ColumnCount = 3;
-            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tlpFilterContainer.Controls.Add(this.tbFilter, 2, 0);
-            this.tlpFilterContainer.Controls.Add(this.lbContient, 1, 0);
-            this.tlpFilterContainer.Controls.Add(this.cbFieldFilter, 0, 0);
-            this.tlpFilterContainer.Location = new System.Drawing.Point(498, 141);
-            this.tlpFilterContainer.Margin = new System.Windows.Forms.Padding(0, 20, 0, 10);
-            this.tlpFilterContainer.Name = "tlpFilterContainer";
-            this.tlpFilterContainer.RowCount = 1;
-            this.tlpFilterContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFilterContainer.Size = new System.Drawing.Size(452, 1);
-            this.tlpFilterContainer.TabIndex = 2;
-            this.tlpFilterContainer.Visible = false;
-            // 
             // tbFilter
             // 
             this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFilter.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbFilter.Location = new System.Drawing.Point(252, 0);
+            this.tbFilter.Location = new System.Drawing.Point(248, 0);
             this.tbFilter.Margin = new System.Windows.Forms.Padding(0);
             this.tbFilter.Name = "tbFilter";
             this.tbFilter.Size = new System.Drawing.Size(200, 27);
@@ -157,10 +137,10 @@
             // 
             this.lbContient.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbContient.AutoSize = true;
-            this.lbContient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbContient.Location = new System.Drawing.Point(173, 0);
+            this.lbContient.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbContient.Location = new System.Drawing.Point(173, 4);
             this.lbContient.Name = "lbContient";
-            this.lbContient.Size = new System.Drawing.Size(76, 1);
+            this.lbContient.Size = new System.Drawing.Size(72, 20);
             this.lbContient.TabIndex = 1;
             this.lbContient.Text = "Contient :";
             // 
@@ -188,10 +168,10 @@
             this.tlpContainerAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tlpContainerAll.ColumnCount = 1;
             this.tlpContainerAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContainerAll.Controls.Add(this.pnlTableContainer, 0, 3);
             this.tlpContainerAll.Controls.Add(this.lbFormTitle, 0, 1);
-            this.tlpContainerAll.Controls.Add(this.tlpFilterContainer, 0, 2);
             this.tlpContainerAll.Controls.Add(this.btnAddItem, 0, 0);
+            this.tlpContainerAll.Controls.Add(this.tlpFilterContainer, 0, 2);
+            this.tlpContainerAll.Controls.Add(this.pnlTableContainer, 0, 3);
             this.tlpContainerAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpContainerAll.Location = new System.Drawing.Point(0, 0);
             this.tlpContainerAll.Margin = new System.Windows.Forms.Padding(0);
@@ -200,10 +180,30 @@
             this.tlpContainerAll.RowCount = 4;
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpContainerAll.Size = new System.Drawing.Size(1000, 647);
             this.tlpContainerAll.TabIndex = 4;
+            // 
+            // tlpFilterContainer
+            // 
+            this.tlpFilterContainer.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.tlpFilterContainer.AutoSize = true;
+            this.tlpFilterContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tlpFilterContainer.ColumnCount = 3;
+            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpFilterContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tlpFilterContainer.Controls.Add(this.tbFilter, 2, 0);
+            this.tlpFilterContainer.Controls.Add(this.lbContient, 1, 0);
+            this.tlpFilterContainer.Controls.Add(this.cbFieldFilter, 0, 0);
+            this.tlpFilterContainer.Location = new System.Drawing.Point(502, 141);
+            this.tlpFilterContainer.Margin = new System.Windows.Forms.Padding(0, 20, 0, 10);
+            this.tlpFilterContainer.Name = "tlpFilterContainer";
+            this.tlpFilterContainer.RowCount = 1;
+            this.tlpFilterContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFilterContainer.Size = new System.Drawing.Size(448, 28);
+            this.tlpFilterContainer.TabIndex = 2;
             // 
             // pnlTableContainer
             // 
@@ -213,10 +213,10 @@
             this.pnlTableContainer.AutoScroll = true;
             this.pnlTableContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.pnlTableContainer.Controls.Add(this.dgvMainTable);
-            this.pnlTableContainer.Location = new System.Drawing.Point(50, 141);
+            this.pnlTableContainer.Location = new System.Drawing.Point(50, 179);
             this.pnlTableContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTableContainer.Name = "pnlTableContainer";
-            this.pnlTableContainer.Size = new System.Drawing.Size(900, 486);
+            this.pnlTableContainer.Size = new System.Drawing.Size(900, 448);
             this.pnlTableContainer.TabIndex = 5;
             // 
             // DefaultForm
@@ -231,10 +231,10 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DefaultForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMainTable)).EndInit();
-            this.tlpFilterContainer.ResumeLayout(false);
-            this.tlpFilterContainer.PerformLayout();
             this.tlpContainerAll.ResumeLayout(false);
             this.tlpContainerAll.PerformLayout();
+            this.tlpFilterContainer.ResumeLayout(false);
+            this.tlpFilterContainer.PerformLayout();
             this.pnlTableContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,7 +245,6 @@
 
         private Label lbFormTitle;
         private Button btnAddItem;
-        private TableLayoutPanel tlpFilterContainer;
         private TextBox tbFilter;
         private Label lbContient;
         private ComboBox cbFieldFilter;
@@ -253,5 +252,6 @@
         private Panel pnlTableContainer;
         private DataGridView dgvMainTable;
         private DataGridViewTextBoxColumn Column1;
+        private TableLayoutPanel tlpFilterContainer;
     }
 }

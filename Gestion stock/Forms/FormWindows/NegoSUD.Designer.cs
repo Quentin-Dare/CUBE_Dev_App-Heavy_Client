@@ -143,8 +143,8 @@
             // 
             // lbArticles
             // 
+            this.lbArticles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lbArticles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbArticles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbArticles.Location = new System.Drawing.Point(0, 0);
             this.lbArticles.Margin = new System.Windows.Forms.Padding(0);
             this.lbArticles.Name = "lbArticles";

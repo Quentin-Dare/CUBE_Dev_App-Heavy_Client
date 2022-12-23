@@ -17,42 +17,91 @@ namespace Gestion_stock.Forms.FormLists
         private string addButtonName = "Nouvel article";
         private bool hideFirstColumn = true;
 
-        private IEnumerable<object> query =
-            from articles in Tables.Articles.AsEnumerable()
-            join fournisseur in Tables.Fournisseurs.AsEnumerable()
-                on (string)articles["IDFournisseur"] equals (string)fournisseur["IDFournisseur"]
-            join familleDeVin in Tables.FamillesDeVin.AsEnumerable()
-                on (string)articles["IDFamilleDeVin"] equals (string)familleDeVin["IDFamilleDeVin"]
-            select new
+
+        private void MainGrid(out IEnumerable<object> query, out ColumnGridDesign[] columnDesign)
+        {
+            query =
+                from articles in Tables.Articles.AsEnumerable()
+                join fournisseur in Tables.Fournisseurs.AsEnumerable()
+                    on (string)articles["IDFournisseur"] equals (string)fournisseur["IDFournisseur"]
+                join familleDeVin in Tables.FamillesDeVin.AsEnumerable()
+                    on (string)articles["IDFamilleDeVin"] equals (string)familleDeVin["IDFamilleDeVin"]
+                select new
+                {
+                    IDArticle = Convert.ToString(articles["IDArticle"]),
+                    Reference = Convert.ToString(articles["Reference"]),
+                    Nom = Convert.ToString(articles["Nom"]),
+                    Domaine = Convert.ToString(fournisseur["Nom"]),
+                    FamilleDeVin = Convert.ToString(familleDeVin["Nom"]),
+                    Annee = Convert.ToInt32(articles["Annee"]),
+                    Quantite = Convert.ToInt32(articles["Quantite"]),
+                    QuantiteMin = Convert.ToInt32(articles["QuantiteMin"]),
+                    PrixTTC = Convert.ToDecimal(articles["PrixTTC"]),
+                    PrixAchat = Convert.ToDecimal(articles["PrixAchat"]),
+                    TVA = Convert.ToDecimal(articles["TVA"]),
+                    Description = Convert.ToString(articles["Description"])
+                };
+
+            ColumnGridDesign[] design =
             {
-                IDArticle = Convert.ToString(articles["IDArticle"]),
-                Reference = Convert.ToString(articles["Reference"]),
-                Nom = Convert.ToString(articles["Nom"]),
-                Domaine = Convert.ToString(fournisseur["Nom"]),
-                FamilleDeVin = Convert.ToString(familleDeVin["Nom"]),
-                Annee = Convert.ToInt32(articles["Annee"]),
-                Quantite = Convert.ToInt32(articles["Quantite"]),
-                QuantiteMin = Convert.ToInt32(articles["QuantiteMin"]),
-                PrixTTC = Convert.ToDecimal(articles["PrixTTC"]),
-                PrixAchat = Convert.ToDecimal(articles["PrixAchat"]),
-                TVA = Convert.ToDecimal(articles["TVA"]),
-                Description = Convert.ToString(articles["Description"])
+                new("Référence", 100, 'L'),
+                new("Nom", 300, 'L'),
+                new("Domaine", 300, 'L'),
+                new("Famille de vin", 150, 'L'),
+                new("Année", 100, 'R'),
+                new("Quantité restante", 100, 'R'),
+                new("Quantité requise", 100, 'R'),
+                new("Prix TTC (€)", 100, 'R'),
+                new("Prix d'achat (€)", 100, 'R'),
+                new("TVA (%)", 100, 'R'),
+                new("Description", 500, 'L')
             };
 
-        private ColumnGridDesign[] columnDesign =
+            columnDesign = design;
+        }
+
+        private void GridBasedOnFournisseur(string IDFournisseur, out IEnumerable<object> query, out ColumnGridDesign[] columnDesign)
         {
-            new ("Référence" , 100, 'L'),
-            new ("Nom" , 300, 'L'),
-            new ("Domaine" , 300, 'L'),
-            new ("Famille de vin" , 150, 'L'),
-            new ("Année" , 100, 'R'),
-            new ("Quantité restante" , 100, 'R'),
-            new ("Quantité requise" , 100, 'R'),
-            new ("Prix TTC (€)" , 100, 'R'),
-            new ("Prix d'achat (€)" , 100, 'R'),
-            new ("TVA (%)" , 100, 'R'),
-            new ("Description" , 500, 'L')
-        };
+            query =
+                from articles in Tables.Articles.AsEnumerable()
+                join fournisseur in Tables.Fournisseurs.AsEnumerable()
+                    on (string)articles["IDFournisseur"] equals (string)fournisseur["IDFournisseur"]
+                join familleDeVin in Tables.FamillesDeVin.AsEnumerable()
+                    on (string)articles["IDFamilleDeVin"] equals (string)familleDeVin["IDFamilleDeVin"]
+                where (string)articles["IDFournisseur"] == IDFournisseur
+                select new
+                {
+                    IDArticle = Convert.ToString(articles["IDArticle"]),
+                    Reference = Convert.ToString(articles["Reference"]),
+                    Nom = Convert.ToString(articles["Nom"]),
+                    FamilleDeVin = Convert.ToString(familleDeVin["Nom"]),
+                    Annee = Convert.ToInt32(articles["Annee"]),
+                    Quantite = Convert.ToInt32(articles["Quantite"]),
+                    QuantiteMin = Convert.ToInt32(articles["QuantiteMin"]),
+                    PrixTTC = Convert.ToDecimal(articles["PrixTTC"]),
+                    PrixAchat = Convert.ToDecimal(articles["PrixAchat"]),
+                    TVA = Convert.ToDecimal(articles["TVA"]),
+                    Description = Convert.ToString(articles["Description"])
+                };
+
+
+
+            ColumnGridDesign[] design =
+            {
+                new("Référence", 100, 'L'),
+                new("Nom", 300, 'L'),
+                new("Famille de vin", 150, 'L'),
+                new("Année", 100, 'R'),
+                new("Quantité restante", 100, 'R'),
+                new("Quantité requise", 100, 'R'),
+                new("Prix TTC (€)", 100, 'R'),
+                new("Prix d'achat (€)", 100, 'R'),
+                new("TVA (%)", 100, 'R'),
+                new("Description", 500, 'L')
+            };
+
+            columnDesign = design;
+        }
 
         #endregion
 
@@ -70,11 +119,22 @@ namespace Gestion_stock.Forms.FormLists
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public Articles()
         {
+            MainGrid(out IEnumerable<object> query, out ColumnGridDesign[] columnDesign);
             InitializePage(formTitle, tabID, showAddButton, addButtonName, hideFirstColumn, query.ToList(), columnDesign);
+        }
+
+        public Articles(string IDFournisseur, string fournisseurName)
+        {
+            formTitle = "Articles de " + fournisseurName;
+            tabID = "ArticlesFournisseur" + IDFournisseur;
+
+            GridBasedOnFournisseur(IDFournisseur, out IEnumerable<object> query, out ColumnGridDesign[] columnDesign);
+            InitializePage(formTitle, tabID, showAddButton, addButtonName, hideFirstColumn, query.ToList(), columnDesign);
+
         }
 
         #endregion

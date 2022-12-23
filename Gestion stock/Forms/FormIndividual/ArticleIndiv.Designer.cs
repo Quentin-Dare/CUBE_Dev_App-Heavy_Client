@@ -40,6 +40,8 @@
             this.lbAnnee = new System.Windows.Forms.Label();
             this.tlpContainerData = new System.Windows.Forms.TableLayoutPanel();
             this.pnlRightData = new System.Windows.Forms.Panel();
+            this.txtQuantiteMin = new System.Windows.Forms.TextBox();
+            this.lbQuantiteMin = new System.Windows.Forms.Label();
             this.txtQuantite = new System.Windows.Forms.TextBox();
             this.txtTVA = new System.Windows.Forms.TextBox();
             this.txtPrixAchat = new System.Windows.Forms.TextBox();
@@ -59,8 +61,6 @@
             this.txtAnnee = new System.Windows.Forms.TextBox();
             this.tlpContainerAll = new System.Windows.Forms.TableLayoutPanel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtQuantiteMin = new System.Windows.Forms.TextBox();
-            this.lbQuantiteMin = new System.Windows.Forms.Label();
             this.flpButtons.SuspendLayout();
             this.tlpContainerData.SuspendLayout();
             this.pnlRightData.SuspendLayout();
@@ -218,6 +218,25 @@
             this.pnlRightData.Size = new System.Drawing.Size(250, 448);
             this.pnlRightData.TabIndex = 1;
             // 
+            // txtQuantiteMin
+            // 
+            this.txtQuantiteMin.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtQuantiteMin.Location = new System.Drawing.Point(154, 52);
+            this.txtQuantiteMin.Margin = new System.Windows.Forms.Padding(0);
+            this.txtQuantiteMin.Name = "txtQuantiteMin";
+            this.txtQuantiteMin.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtQuantiteMin.Size = new System.Drawing.Size(96, 24);
+            this.txtQuantiteMin.TabIndex = 18;
+            // 
+            // lbQuantiteMin
+            // 
+            this.lbQuantiteMin.AutoSize = true;
+            this.lbQuantiteMin.Location = new System.Drawing.Point(13, 55);
+            this.lbQuantiteMin.Name = "lbQuantiteMin";
+            this.lbQuantiteMin.Size = new System.Drawing.Size(118, 19);
+            this.lbQuantiteMin.TabIndex = 19;
+            this.lbQuantiteMin.Text = "Quantité requise :";
+            // 
             // txtQuantite
             // 
             this.txtQuantite.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -331,9 +350,9 @@
             this.lkFournisseur.Name = "lkFournisseur";
             this.lkFournisseur.Size = new System.Drawing.Size(157, 19);
             this.lkFournisseur.TabIndex = 17;
-            this.lkFournisseur.TabStop = true;
             this.lkFournisseur.Text = "Accéder au fournisseur...";
             this.lkFournisseur.VisitedLinkColor = System.Drawing.Color.Gray;
+            this.lkFournisseur.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FournisseurLinkClicked);
             // 
             // txtFournisseur
             // 
@@ -426,25 +445,6 @@
             // 
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
-            // 
-            // txtQuantiteMin
-            // 
-            this.txtQuantiteMin.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtQuantiteMin.Location = new System.Drawing.Point(154, 52);
-            this.txtQuantiteMin.Margin = new System.Windows.Forms.Padding(0);
-            this.txtQuantiteMin.Name = "txtQuantiteMin";
-            this.txtQuantiteMin.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtQuantiteMin.Size = new System.Drawing.Size(96, 24);
-            this.txtQuantiteMin.TabIndex = 18;
-            // 
-            // lbQuantiteMin
-            // 
-            this.lbQuantiteMin.AutoSize = true;
-            this.lbQuantiteMin.Location = new System.Drawing.Point(13, 55);
-            this.lbQuantiteMin.Name = "lbQuantiteMin";
-            this.lbQuantiteMin.Size = new System.Drawing.Size(118, 19);
-            this.lbQuantiteMin.TabIndex = 19;
-            this.lbQuantiteMin.Text = "Quantité requise :";
             // 
             // ArticleIndiv
             // 

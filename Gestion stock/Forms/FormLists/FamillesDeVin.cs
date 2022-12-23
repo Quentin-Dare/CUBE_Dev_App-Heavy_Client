@@ -1,5 +1,4 @@
-﻿using Gestion_stock.Forms.FormIndividual;
-using Gestion_stock.Forms.FormLists.Model;
+﻿using Gestion_stock.Forms.FormLists.Model;
 using Gestion_stock.Forms.FormNewItem;
 using Gestion_stock.NegosudData;
 using Gestion_stock.Utils.CustomControls;
@@ -45,7 +44,7 @@ namespace Gestion_stock.Forms.FormLists
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public FamillesDeVin()
         {

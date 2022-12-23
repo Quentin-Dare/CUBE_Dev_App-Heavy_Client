@@ -219,7 +219,6 @@
             // 
             // txtQuantiteMin
             // 
-            this.txtQuantiteMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQuantiteMin.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtQuantiteMin.Location = new System.Drawing.Point(154, 52);
             this.txtQuantiteMin.Margin = new System.Windows.Forms.Padding(0);
@@ -239,7 +238,6 @@
             // 
             // txtQuantite
             // 
-            this.txtQuantite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQuantite.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtQuantite.Location = new System.Drawing.Point(154, 7);
             this.txtQuantite.Margin = new System.Windows.Forms.Padding(0);
@@ -250,7 +248,6 @@
             // 
             // txtTVA
             // 
-            this.txtTVA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTVA.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtTVA.Location = new System.Drawing.Point(154, 97);
             this.txtTVA.Margin = new System.Windows.Forms.Padding(0);
@@ -261,7 +258,6 @@
             // 
             // txtPrixAchat
             // 
-            this.txtPrixAchat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPrixAchat.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtPrixAchat.Location = new System.Drawing.Point(154, 142);
             this.txtPrixAchat.Margin = new System.Windows.Forms.Padding(0);
@@ -272,7 +268,6 @@
             // 
             // txtPrixTTC
             // 
-            this.txtPrixTTC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPrixTTC.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtPrixTTC.Location = new System.Drawing.Point(154, 187);
             this.txtPrixTTC.Margin = new System.Windows.Forms.Padding(0);

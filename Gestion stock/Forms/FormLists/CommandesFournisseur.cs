@@ -11,15 +11,35 @@ namespace Gestion_stock.Forms.FormLists
     {
         #region Variables
 
-        private string formTitle = "Commandes fournisseur";
+        private string formTitle = "Commandes fournisseurs";
         private string tabID = "CommandesFournisseur";
         private bool showAddButton = true;
         private string addButtonName = "Nouvelle commande";
         private bool hideFirstColumn = false;
 
-        private IEnumerable<object> query = new List<object>();
+        private IEnumerable<object> query =
+            from commandesFournisseur in Tables.CommandesFournisseur.AsEnumerable()
+            join fournisseurs in Tables.Fournisseurs.AsEnumerable()
+                on commandesFournisseur["IDFournisseur"] equals fournisseurs["IDFournisseur"]
+            select new
+            {
+                IDCommandeFournisseur = Convert.ToString(commandesFournisseur["IDCommandeFournisseur"]),
+                IDFournisseur = Convert.ToString(commandesFournisseur["IDFournisseur"]),
+                Domaine = Convert.ToString(fournisseurs["Nom"]),
+                DateCommande = Convert.ToDateTime(commandesFournisseur["DateCommande"]).ToString("dd/mm/yyyy HH:mm"),
+                TypeCommande = Convert.ToString(commandesFournisseur["TypeCommande"]),
+                Statut = Convert.ToString(commandesFournisseur["Statut"])
+            };
 
-        private ColumnGridDesign[] columnDesign = new ColumnGridDesign[0];
+        private ColumnGridDesign[] columnDesign =
+        {
+            new ("ID", 100, 'L'),
+            new ("ID Fournisseur", 100, 'L'),
+            new ("Nom", 200, 'L'),
+            new ("Date de la commande", 150, 'L'),
+            new ("Type de commande", 150, 'L'),
+            new ("Statut", 150, 'L')
+        };
 
         #endregion
 
@@ -27,17 +47,17 @@ namespace Gestion_stock.Forms.FormLists
 
         protected override Form GetIndividualPage(string id)
         {
-            return new ArticleIndiv(id);
+            return new CommandeFournisseurIndiv(id);
         }
 
         protected override Form GetNewItemForm()
         {
-            return new NewArticle();
+            return new NewCommandeFournisseur();
         }
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public CommandesFournisseur()
         {

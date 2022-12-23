@@ -1,6 +1,7 @@
 ﻿using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using Gestion_stock.Utils.CustomControls;
+using System.Data;
 
 namespace Gestion_stock.Forms.FormLists.Model
 {
@@ -12,7 +13,9 @@ namespace Gestion_stock.Forms.FormLists.Model
         private string tabID = string.Empty;
         private bool showAddButton;
         private bool hideFirstColumn;
+
         private int selectedRow;
+        private List<object> rowsList = new List<object>();
 
         #endregion
 
@@ -95,15 +98,15 @@ namespace Gestion_stock.Forms.FormLists.Model
         #region Constructor Methods
 
         protected void InitializePage(string formTitle, string tabID, bool showAddButton, string addButtonName,
-            bool hideFirstColumn, List<object> query, ColumnGridDesign[] columnDesign)
+            bool hideFirstColumn, List<object> rows, ColumnGridDesign[] columnDesign)
         {
             this.FormTitle = formTitle;
             this.TabID = tabID;
             this.ShowAddButton = showAddButton;
-
             this.btnAddItem.Text = addButtonName;
+            this.rowsList = rows;
 
-            InitializeGridView(query);
+            InitializeGridView();
 
             // Si le nombre d'objets dans columnDesign est différent du nombre de colonnes, alors erreur
             if ((!hideFirstColumn && columnDesign.Length != dgvMainTable.ColumnCount)
@@ -120,20 +123,13 @@ namespace Gestion_stock.Forms.FormLists.Model
             selectedRow = 0;
         }
 
-        private void InitializeGridView(List<object> query)
+        private void InitializeGridView()
         {
-            BindingSource mainTableData = new BindingSource();
-
-            // Ajout des lignes au BindingSource
-            foreach (object row in query)
-            {
-                mainTableData.Add(row);
-            }
-
             dgvMainTable.Columns.Clear();
             dgvMainTable.AutoGenerateColumns = true;
-            dgvMainTable.DataSource = mainTableData;
+            dgvMainTable.DataSource = rowsList;
             dgvMainTable.AutoSize = true;
+            dgvMainTable.AutoGenerateColumns = false;
         }
 
         private void SetGridViewDesign(bool hideFirstColumn, ColumnGridDesign[] columnDesign)
@@ -229,7 +225,7 @@ namespace Gestion_stock.Forms.FormLists.Model
 
         #endregion
 
-        #region Tests et Work in progress
+        #region Filtering
 
         /// <summary>
         /// Tentative de filtrage des données (pas opérationnel)
@@ -239,8 +235,8 @@ namespace Gestion_stock.Forms.FormLists.Model
         private void FilterData(object sender, EventArgs e)
         {
             // Check pour sélectionner si l'évènement a bien été fait par un control présent dans un Form DefaultForm
-            if (sender is not Control closeBtn
-                || closeBtn.FindForm() is not DefaultForm defaultForm)
+            if (sender is not Control control
+                || control.FindForm() is not DefaultForm defaultForm)
             {
                 CustomMethods.DisplayError("Erreur pour trouver DefaultForm");
                 return;
@@ -250,16 +246,48 @@ namespace Gestion_stock.Forms.FormLists.Model
             if (defaultForm.cbFieldFilter.SelectedIndex == -1
                 || string.IsNullOrEmpty(defaultForm.tbFilter.Text))
             {
-                //defaultForm.dgvMainTable.DataSource = mainTableData;
+                defaultForm.dgvMainTable.DataSource = rowsList;
+                defaultForm.dgvMainTable.Refresh();
                 return;
             }
 
-            //int selectedColumn = defaultForm.cbFieldFilter.SelectedIndex;
+            string columnToFilter = GetPropertyName(defaultForm);
+            string filter = defaultForm.tbFilter.Text;
 
-            //BindingSource newBindingSource = defaultForm.mainTableData;
-            //newBindingSource.Filter = string.Format("{0} = '{1}'", defaultForm.dgvMainTable.Columns[selectedColumn].Name, defaultForm.tbFilter.Text);
+            // Filtre des données
+            List<object> filteredRows = rowsList.Where(r => r.GetType().GetProperty(columnToFilter).GetValue(r).ToString().Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            //defaultForm.dgvMainTable.DataSource = newBindingSource;
+            defaultForm.dgvMainTable.DataSource = filteredRows;
+            defaultForm.dgvMainTable.Refresh();
+
+            if (defaultForm.dgvMainTable.CurrentCell != null)
+            {
+                selectedRow = defaultForm.dgvMainTable.CurrentCell.RowIndex;
+            }
+            else
+            {
+                selectedRow = -1;
+            }
+
+        }
+
+        /// <summary>
+        /// Retourne la propriété de l'objet à filtrer
+        /// </summary>
+        /// <param name="defaultForm"></param>
+        /// <returns></returns>
+        private string GetPropertyName(DefaultForm defaultForm)
+        {
+            int columnIndex = defaultForm.cbFieldFilter.SelectedIndex;
+
+            if (hideFirstColumn)
+            {
+                columnIndex++;
+            }
+
+            string columnName = defaultForm.dgvMainTable.Columns[columnIndex].Name;
+
+            return columnName;
         }
 
         #endregion

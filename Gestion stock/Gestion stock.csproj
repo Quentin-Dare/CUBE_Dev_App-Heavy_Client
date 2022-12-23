@@ -10,6 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\FormIndividual\CommandeFournisseurIndiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormIndividual\CommandeClientIndiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormIndividual\ClientIndiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormIndividual\FournisseurIndiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\FormLists\FamillesDeVin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -23,6 +35,15 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\FormLists\Fournisseurs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormNewItem\NewCommandeFournisseur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormNewItem\NewClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormNewItem\NewFournisseur.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\FormNewItem\NewFamilleDeVin.cs">

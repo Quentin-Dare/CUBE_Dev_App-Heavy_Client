@@ -17,9 +17,29 @@ namespace Gestion_stock.Forms.FormLists
         private string addButtonName = "";
         private bool hideFirstColumn = false;
 
-        private IEnumerable<object> query = new List<object>();
+        private IEnumerable<object> query =
+            from clients in Tables.Clients.AsEnumerable()
+            select new
+            {
+                IDClient = Convert.ToString(clients["IDClient"]),
+                Nom = Convert.ToString(clients["Nom"]),
+                Prenom = Convert.ToString(clients["Prenom"]),
+                Adresse = Convert.ToString(clients["Adresse"]),
+                CodePostal = Convert.ToString(clients["CodePostal"]),
+                Ville = Convert.ToString(clients["Ville"]),
+                Email = Convert.ToString(clients["Email"]),
+            };
 
-        private ColumnGridDesign[] columnDesign = new ColumnGridDesign[0];
+        private ColumnGridDesign[] columnDesign =
+        {
+            new ("ID Client", 150, 'L'),
+            new ("Nom", 300, 'L'),
+            new ("Prénom", 300, 'L'),
+            new ("Adresse" , 500, 'L'),
+            new ("Code postal" , 100, 'L'),
+            new ("Ville" , 200, 'L'),
+            new ("Adresse mail", 300, 'L'),
+        };
 
         #endregion
 
@@ -27,7 +47,7 @@ namespace Gestion_stock.Forms.FormLists
 
         protected override Form GetIndividualPage(string id)
         {
-            return new ArticleIndiv(id);
+            return new ClientIndiv(id);
         }
 
         protected override Form GetNewItemForm()
@@ -37,7 +57,7 @@ namespace Gestion_stock.Forms.FormLists
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public Clients()
         {

@@ -21,7 +21,7 @@ namespace Gestion_stock.MainForm
 
         private void TryLogin(object sender, EventArgs e)
         {
-            // Check du nom d'utilisateur
+            // Check du nom d'utilisateur et du mot de passe
             if (tbUsername.Text == DataUtils.UserName
                 && tbPassword.Text == DataUtils.Password)
             {

@@ -2,17 +2,19 @@
 
 namespace Gestion_stock.NegosudData
 {
-    #region Static Methods
-
     public static class DataUtils
     {
         #region Unique Variables
 
         public static string UserName { get => userName; set => userName = value; }
         public static string Password { get => password; set => password = value; }
+        public static string ClosStatus { get => closStatus; set => closStatus = value; }
+        public static string EnCoursStatus { get => enCoursStatus; set => enCoursStatus = value; }
 
         private static string userName = "";
         private static string password = "";
+        private static string closStatus = "CLOS";
+        private static string enCoursStatus = "EN COURS";
 
         #endregion
 
@@ -45,8 +47,6 @@ namespace Gestion_stock.NegosudData
 
         #endregion
     }
-
-    #endregion
 
     #region Data Classes
 

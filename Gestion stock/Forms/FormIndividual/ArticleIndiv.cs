@@ -23,7 +23,7 @@ namespace Gestion_stock.Forms.FormIndividual
 
         #endregion
 
-        #region Public variables
+        #region Public Variables
 
         public string FormTitle
         {
@@ -38,7 +38,7 @@ namespace Gestion_stock.Forms.FormIndividual
 
         #endregion
 
-        #region Constructeur
+        #region Constructor
 
         public ArticleIndiv(string IDArticle)
         {
@@ -97,25 +97,7 @@ namespace Gestion_stock.Forms.FormIndividual
 
         private void GetPageInfo()
         {
-            IEnumerable<PageInfo> articleInfos =
-            from articles in Tables.Articles.AsEnumerable()
-            where IDArticle == (string)articles["IDArticle"]
-            select new PageInfo
-            {
-                Reference = Convert.ToString(articles["Reference"]),
-                Nom = Convert.ToString(articles["Nom"]),
-                IDFournisseur = Convert.ToString(articles["IDFournisseur"]),
-                IDFamilleDeVin = Convert.ToString(articles["IDFamilleDeVin"]),
-                Annee = Convert.ToInt32(articles["Annee"]),
-                Description = Convert.ToString(articles["Description"]),
-                PrixTTC = Convert.ToDecimal(articles["PrixTTC"]),
-                PrixAchat = Convert.ToDecimal(articles["PrixAchat"]),
-                TVA = Convert.ToDecimal(articles["TVA"]),
-                Quantite = Convert.ToInt32(articles["Quantite"]),
-                QuantiteMin = Convert.ToInt32(articles["QuantiteMin"]),
-            };
-
-            PageInfo? queryResult = articleInfos.FirstOrDefault();
+            PageInfo? queryResult = GetItemData();
 
             if (queryResult is null)
             {
@@ -129,11 +111,6 @@ namespace Gestion_stock.Forms.FormIndividual
 
         private void WritePageInfo()
         {
-            if (article == null)
-            {
-                return;
-            }
-
             txtReference.Text = article.Reference;
             txtNom.Text = article.Nom;
             txtFournisseur.Text = GetFournisseurName();
@@ -169,12 +146,12 @@ namespace Gestion_stock.Forms.FormIndividual
 
         private void SavePage(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Etes-vous sûr de vouloir enregistrer ?", "Enregistrement des données", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (!CustomMethods.ConfirmDataSave())
             {
                 return;
             }
 
-            if (ControlData())
+            if (IsDataValid())
             {
                 UpdateValues();
                 MessageBox.Show("Bon bah code fdp");
@@ -183,18 +160,70 @@ namespace Gestion_stock.Forms.FormIndividual
 
         private void ReloadPage(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Recharger la page ? Les données modifiées seront perdue.", "Rafraîchir", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (CustomMethods.ConfirmDataReload())
             {
                 InitializeItemData();
                 RemoveErrors();
             }
         }
 
+        private void FournisseurLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            int fournisseurIndex = txtFournisseur.SelectedIndex;
+            if (fournisseurIndex < 0)
+            {
+                CustomMethods.DisplayError("Fournisseur non-défini");
+                return;
+            }
+            string? idFournisseur = listeNomFournisseurs[fournisseurIndex].IDFournisseur;
+
+            if(idFournisseur is null)
+            {
+                CustomMethods.DisplayError("Fournisseur non-défini");
+                return;
+            }
+
+            if (this.TopLevelControl is not NegoSUD negoSUD)
+            {
+                CustomMethods.DisplayError("Page principale innaccessible.");
+                return;
+            }
+
+            negoSUD.AddTabIfNotExists(new FournisseurIndiv(idFournisseur));
+        }
+
+        #endregion
+
+        #region Requests
+
+        private PageInfo? GetItemData()
+        {
+            IEnumerable<PageInfo> articleInfos =
+            from articles in Tables.Articles.AsEnumerable()
+            where IDArticle == (string)articles["IDArticle"]
+            select new PageInfo
+            {
+                Reference = Convert.ToString(articles["Reference"]),
+                Nom = Convert.ToString(articles["Nom"]),
+                IDFournisseur = Convert.ToString(articles["IDFournisseur"]),
+                IDFamilleDeVin = Convert.ToString(articles["IDFamilleDeVin"]),
+                Annee = Convert.ToInt32(articles["Annee"]),
+                Description = Convert.ToString(articles["Description"]),
+                PrixTTC = Convert.ToDecimal(articles["PrixTTC"]),
+                PrixAchat = Convert.ToDecimal(articles["PrixAchat"]),
+                TVA = Convert.ToDecimal(articles["TVA"]),
+                Quantite = Convert.ToInt32(articles["Quantite"]),
+                QuantiteMin = Convert.ToInt32(articles["QuantiteMin"]),
+            };
+
+            return articleInfos.FirstOrDefault();
+        }
+
         #endregion
 
         #region Save Data Methods
 
-        private bool ControlData()
+        private bool IsDataValid()
         {
             List<Control> controlsToCheck;
             bool isDataValid = true;
@@ -362,7 +391,7 @@ namespace Gestion_stock.Forms.FormIndividual
 
         #endregion
 
-        #region
+        #region Other Methods
 
         private void RemoveErrors()
         {
@@ -376,6 +405,7 @@ namespace Gestion_stock.Forms.FormIndividual
 
         private class PageInfo
         {
+            public string? IDArticle { get; set; }
             public string? Reference { get; set; }
             public string? Nom { get; set; }
             public string? IDFournisseur { get; set; }

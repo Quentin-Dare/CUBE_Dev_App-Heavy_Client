@@ -1,25 +1,24 @@
-﻿using Gestion_stock.Forms.FormLists;
+﻿using Gestion_stock.Forms.FormLists.Model;
 using Gestion_stock.NegosudData;
 using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Gestion_stock.Forms.FormNewItem
 {
-    public partial class NewFamilleDeVin : Form, IPageNegosud
+    public partial class NewFournisseur : Form, IPageNegosud
     {
         #region Private Variables
 
         // Infos de base
-        private string formTitle = "Nouvelle famille de vin";
-        private string tabID = "NewFamilleDeVin";
+        private string formTitle = "Nouveau fournisseur";
+        private string tabID = "Fournisseur";
 
-        // Données de l'item
-        private PageInfo newFamilleDeVin;
+        // ID et données de l'article
+        private PageInfo fournisseur;
 
         // Données parallèles
-        private List<FamilleDeVinInfo> listeFamillesDeVin;
+        private List<FournisseurInfo> listeNomFournisseurs;
 
         #endregion
 
@@ -40,17 +39,17 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #region Constructor
 
-        public NewFamilleDeVin()
+        public NewFournisseur()
         {
             InitializeComponent();
             Initialize.Design(this);
             this.TopLevel = false;
             this.Dock = DockStyle.Fill;
 
-            newFamilleDeVin = new PageInfo();
+            fournisseur = new PageInfo();
 
-            // Récupération des familles de vin
-            listeFamillesDeVin = DataUtils.GetWineFamiliesName();
+            // Récupération des fournisseurs
+            listeNomFournisseurs = DataUtils.GetSuppliersName();
 
             ResetPageInfo();
         }
@@ -60,6 +59,10 @@ namespace Gestion_stock.Forms.FormNewItem
         private void ResetPageInfo()
         {
             txtNom.Text = null;
+            txtEmail.Text = null;
+            txtAdresse.Text = null;
+            txtCodePostal.Text = null;
+            txtVille.Text = null;
         }
 
         #endregion
@@ -93,34 +96,48 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #endregion
 
-        #region Requests
-
-        #endregion
-
         #region Save Data Methods
 
-        /// <summary>
-        /// Contrôle les données de la page et met en erreur les champs non-valides
-        /// </summary>
-        /// <returns></returns>
         private bool IsDataValid()
         {
+            List<Control> controlsToCheck;
+            bool isDataValid = true;
+
+            // Suppression des erreurs affichées
             RemoveErrors();
 
-            // Contrôle des textbox
-            if (string.IsNullOrEmpty(txtNom.Text))
+            // Sélection des champs textbox et combobox de la partie gauche
+            controlsToCheck = this.pnlLeftData.Controls.Cast<Control>().Where(c => c is TextBox).ToList();
+
+            // Contrôle des données
+            if (!CheckControlsValue(controlsToCheck))
             {
-                this.errorProvider.SetError(txtNom, "La valeur du champ n'est pas valide.");
-                return false;
+                isDataValid = false;
             }
 
-            if (FamilleDeVinNameExists())
+            if (FournisseurNameExists())
             {
                 this.errorProvider.SetError(txtNom, "Ce nom est déjà utilisé.");
-                return false;
+                isDataValid = false;
             }
 
-            return true;
+            return isDataValid;
+        }
+
+        private bool CheckControlsValue(List<Control> controlsToCheck)
+        {
+            bool dataValidity = true;
+            foreach (Control control in controlsToCheck)
+            {
+                // Contrôle des textbox
+                if (control is TextBox && string.IsNullOrEmpty(control.Text))
+                {
+                    this.errorProvider.SetError(control, "La valeur du champ n'est pas valide.");
+                    dataValidity = false;
+                }
+            }
+
+            return dataValidity;
         }
 
         /// <summary>
@@ -128,21 +145,25 @@ namespace Gestion_stock.Forms.FormNewItem
         /// </summary>
         private void UpdateValues()
         {
-            newFamilleDeVin.Nom = txtNom.Text;
+            fournisseur.Nom = txtNom.Text;
+            fournisseur.Email = txtEmail.Text;
+            fournisseur.Adresse = txtAdresse.Text;
+            fournisseur.CodePostal = txtCodePostal.Text;
+            fournisseur.Ville = txtVille.Text;
         }
 
         /// <summary>
         /// Détecte si le nom rentré existe déjà
         /// </summary>
         /// <returns></returns>
-        private bool FamilleDeVinNameExists()
+        private bool FournisseurNameExists()
         {
             if (string.IsNullOrEmpty(txtNom.Text))
             {
                 return false;
             }
 
-            int namesCount = listeFamillesDeVin.Where(f => f.Nom == txtNom.Text).Count();
+            int namesCount = listeNomFournisseurs.Where(f => f.Nom == txtNom.Text).Count();
 
             // Si il existe déjà un nom similaire, return true;
             if (namesCount > 0)
@@ -169,10 +190,15 @@ namespace Gestion_stock.Forms.FormNewItem
 
         private class PageInfo
         {
-            public string? IDFamilleDeVin { get; set; }
+            public string? IDFournisseur { get; set; }
             public string? Nom { get; set; }
+            public string? Email { get; set; }
+            public string? Adresse { get; set; }
+            public string? CodePostal { get; set; }
+            public string? Ville { get; set; }
         }
 
         #endregion
+
     }
 }
