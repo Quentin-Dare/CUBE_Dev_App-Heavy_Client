@@ -26,5 +26,10 @@
         {
             return MessageBox.Show("Etes-vous sûr de vouloir annuler puis clore la commande ?", "Annulation d'une commande", MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
+
+        public static bool ConfirmCommandCreation()
+        {
+            return MessageBox.Show("Etes-vous sûr de vouloir créer une nouvelle commande ?", "Création d'une commande", MessageBoxButtons.YesNo) == DialogResult.Yes;
+        }
     }
 }

@@ -93,10 +93,6 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #endregion
 
-        #region Requests
-
-        #endregion
-
         #region Save Data Methods
 
         /// <summary>
