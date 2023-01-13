@@ -359,7 +359,7 @@
             this.dgvPanier.Size = new System.Drawing.Size(810, 251);
             this.dgvPanier.TabIndex = 5;
             this.dgvPanier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ArticlesCellClicked);
-            this.dgvPanier.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPanier_CellValidated);
+            this.dgvPanier.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.ArticleValide);
             this.dgvPanier.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.EnterEditingFirstTime);
             // 
             // IDArticle

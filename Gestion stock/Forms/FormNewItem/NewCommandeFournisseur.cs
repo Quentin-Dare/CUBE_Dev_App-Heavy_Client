@@ -1,10 +1,7 @@
-﻿using Gestion_stock.Forms.FormIndividual;
-using Gestion_stock.NegosudData;
+﻿using Gestion_stock.NegosudData;
 using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
-using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Gestion_stock.Forms.FormNewItem
 {
@@ -118,7 +115,7 @@ namespace Gestion_stock.Forms.FormNewItem
                 string? idArticle = dgvPanier.Rows[i].Cells["IDArticle"].Value.ToString();
                 string? quantite = dgvPanier.Rows[i].Cells["Quantite"].Value.ToString();
 
-                string?[] article = {idArticle, quantite};
+                string?[] article = { idArticle, quantite };
 
                 listeArticles.Add(article);
             }
@@ -252,7 +249,7 @@ namespace Gestion_stock.Forms.FormNewItem
             dgvPanier.CurrentCell = articleRow["Quantite"];
         }
 
-        private void dgvPanier_CellValidated(object sender, DataGridViewCellEventArgs e)
+        private void ArticleValide(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dgvPanier.Columns["Quantite"].Index)
             {
@@ -281,6 +278,15 @@ namespace Gestion_stock.Forms.FormNewItem
 
             this.dgvPanier.Rows.RemoveAt(selectedArticle);
             selectedArticle = -1;
+            CalculCommandeTotal();
+        }
+
+        #endregion
+
+        #region Update Data
+        private void CoutTransportChanged(object sender, EventArgs e)
+        {
+            CalculCommandeTotal();
         }
 
         #endregion
@@ -308,11 +314,6 @@ namespace Gestion_stock.Forms.FormNewItem
         #endregion
 
         #region Manage Data
-
-        private void CoutTransportChanged(object sender, EventArgs e)
-        {
-            CalculCommandeTotal();
-        }
 
         private void CalculArticleTotal(int rowIndex)
         {
@@ -353,7 +354,7 @@ namespace Gestion_stock.Forms.FormNewItem
 
                 txtTotalTTC.Text = (coutTransport + totalArticles).ToString();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return;
             }

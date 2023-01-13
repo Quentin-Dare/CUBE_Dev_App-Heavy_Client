@@ -1,9 +1,7 @@
-﻿using Gestion_stock.Forms.FormLists;
-using Gestion_stock.NegosudData;
+﻿using Gestion_stock.NegosudData;
 using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Gestion_stock.Forms.FormNewItem
 {
