@@ -11,7 +11,7 @@ namespace Gestion_stock
         static void Main()
         {
             // Initialisation du projet
-            if (InitializeProject()) 
+            if (InitializeProject())
             {
                 ApplicationConfiguration.Initialize();
                 Application.Run(new Login());

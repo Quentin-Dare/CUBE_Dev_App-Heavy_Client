@@ -1,8 +1,8 @@
+using Gestion_stock.Forms.FormLists;
+using Gestion_stock.Forms.FormOthers;
+using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using Gestion_stock.Utils.CustomControls;
-using Gestion_stock.NegosudData.Interfaces;
-using Gestion_stock.Forms.FormLists;
-using Gestion_stock.Forms.FormIndividual;
 
 namespace Gestion_stock
 {
@@ -90,7 +90,7 @@ namespace Gestion_stock
 
         private void lbParametres_Click(object sender, EventArgs e)
         {
-            //AddTabIfNotExists("Param�tres", "Parametres", new Parametres());
+            AddTabIfNotExists(new Parametres());
         }
 
         #endregion

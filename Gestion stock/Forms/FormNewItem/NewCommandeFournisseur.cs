@@ -1,9 +1,7 @@
-﻿using Gestion_stock.Forms.FormIndividual;
-using Gestion_stock.NegosudData;
+﻿using Gestion_stock.NegosudData;
 using Gestion_stock.NegosudData.Interfaces;
 using Gestion_stock.Utils;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Gestion_stock.Forms.FormNewItem
 {
@@ -18,14 +16,15 @@ namespace Gestion_stock.Forms.FormNewItem
         // ID et données de la commande
         private PageInfo commande;
         private string? idFournisseur;
-        List<GridViewInfo> gridArticlesListe = new List<GridViewInfo>();
-        List<string> idArticles = new List<string>();
+        List<string?[]> listeArticles = new List<string?[]>();
 
         // Autres données
+        int selectedFournisseur = -1;
         int selectedArticle = -1;
 
         List<FournisseurInfo> listeNomFournisseurs = DataUtils.GetSuppliersName();
-        List<object> listeArticles = new List<object>();
+        List<ArticleInfo> everyArticleList = new List<ArticleInfo>();
+        List<ArticleInfo> fournisseurArticlesList = new List<ArticleInfo>();
 
         #endregion
 
@@ -55,6 +54,7 @@ namespace Gestion_stock.Forms.FormNewItem
             commande = new PageInfo();
 
             FillComboBoxData();
+            GetAllArticlesList();
             AddEvents();
         }
 
@@ -68,13 +68,15 @@ namespace Gestion_stock.Forms.FormNewItem
             }
         }
 
-        /// <summary>
-        /// Ajout des évènements custom de la page
-        /// </summary>
+        private void GetAllArticlesList()
+        {
+            everyArticleList = GetArticles().ToList();
+        }
+
         private void AddEvents()
         {
             // Evènements pour filter les textbox de chiffres
-            this.txtCoutTransport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CustomEvents.FilterDecimals);
+            this.txtCoutTransport.KeyPress += new KeyPressEventHandler(CustomEvents.FilterDecimals);
         }
 
         #endregion
@@ -83,11 +85,39 @@ namespace Gestion_stock.Forms.FormNewItem
 
         #region Events
 
+        #region Save / Reload
+
         private void SavePage(object sender, EventArgs e)
         {
-            if (!CustomMethods.ConfirmDataSave())
+            if (!CustomMethods.ConfirmCommandCreation())
             {
                 return;
+            }
+
+            if (!ControlData())
+            {
+                return;
+            }
+
+            // Ecriture des données
+            commande = new PageInfo()
+            {
+                IDFournisseur = idFournisseur,
+                DateCommande = DateTime.UtcNow.ToString("HH:mm dd/MM/yyyy"),
+                TypeCommande = "MANUELLE",
+                Statut = "EN COURS",
+                CoutTransport = Convert.ToDecimal(txtCoutTransport.Text)
+            };
+
+            // Liste des articles commandés
+            for (int i = 0; i < dgvPanier.Rows.Count; i++)
+            {
+                string? idArticle = dgvPanier.Rows[i].Cells["IDArticle"].Value.ToString();
+                string? quantite = dgvPanier.Rows[i].Cells["Quantite"].Value.ToString();
+
+                string?[] article = { idArticle, quantite };
+
+                listeArticles.Add(article);
             }
 
             MessageBox.Show("Bon bah code fdp");
@@ -95,13 +125,21 @@ namespace Gestion_stock.Forms.FormNewItem
 
         private void ReloadPage(object sender, EventArgs e)
         {
-            if (!CustomMethods.ConfirmCancelCommand())
+            if (!CustomMethods.ConfirmDataReload())
             {
                 return;
             }
 
-            MessageBox.Show("Bon bah code fdp");
+            txtCoutTransport.Text = "0";
+            txtFournisseur.SelectedIndex = -1;
+            txtIDFournisseur.Text = null;
+            dgvPanier.Rows.Clear();
+            txtTotalTTC.Text = "0";
         }
+
+        #endregion
+
+        #region Changement fournisseur
 
         /// <summary>
         /// Evenement quand le nom du fournisseur a été changé
@@ -110,6 +148,21 @@ namespace Gestion_stock.Forms.FormNewItem
         /// <param name="e"></param>
         private void FournisseurChanged(object sender, EventArgs e)
         {
+            if (dgvPanier.Rows.Count > 0 && txtFournisseur.SelectedIndex >= 0)
+            {
+                DialogResult alert = MessageBox.Show("Vous allez perdre toutes les données. Continuer ?", "Avertissement",
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (alert == DialogResult.No)
+                {
+                    txtFournisseur.SelectedIndex = selectedFournisseur;
+                    return;
+                }
+            }
+
+            this.dgvPanier.Rows.Clear();
+            selectedFournisseur = txtFournisseur.SelectedIndex;
+
             if (txtFournisseur.SelectedIndex < 0)
             {
                 idFournisseur = null;
@@ -117,12 +170,32 @@ namespace Gestion_stock.Forms.FormNewItem
             }
             else
             {
-                idFournisseur = listeNomFournisseurs[txtFournisseur.SelectedIndex].IDFournisseur;
+                idFournisseur = listeNomFournisseurs[selectedFournisseur].IDFournisseur;
                 this.pnlContainerBtnRows.Visible = true;
+
+                // Sélection des articles du fournisseur
+                fournisseurArticlesList = everyArticleList.Where(r => r.IDFournisseur == idFournisseur).ToList();
+
+                // Remplissage des combobox du tableau
+                if (dgvPanier.Columns["Reference"] is DataGridViewComboBoxColumn referenceColumn
+                    && dgvPanier.Columns["Nom"] is DataGridViewComboBoxColumn nomColumn)
+                {
+                    referenceColumn.Items.Clear();
+                    nomColumn.Items.Clear();
+                    for (int i = 0; i < fournisseurArticlesList.Count; i++)
+                    {
+                        referenceColumn.Items.Add(fournisseurArticlesList[i].Reference);
+                        nomColumn.Items.Add(fournisseurArticlesList[i].Nom);
+                    }
+                }
             }
 
             txtIDFournisseur.Text = idFournisseur;
         }
+
+        #endregion
+
+        #region Grid Events
 
         private void ArticlesCellClicked(object sender, DataGridViewCellEventArgs e)
         {
@@ -141,23 +214,52 @@ namespace Gestion_stock.Forms.FormNewItem
             {
                 string quantiteValue = tb.Text;
                 tb.KeyPress -= new KeyPressEventHandler(CustomEvents.FilterIntegers);
-
                 tb.KeyPress += new KeyPressEventHandler(CustomEvents.FilterIntegers);
-
-                if (quantiteValue == tb.Text)
-                {
-                    CalculTotal(dgvPanier.CurrentCell.RowIndex);
-                }
             }
-        }
-
-        public static void FilterIntegers(object? sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            else if ((dgvPanier.CurrentCell.ColumnIndex == dgvPanier.Columns["Reference"].Index
+                || dgvPanier.CurrentCell.ColumnIndex == dgvPanier.Columns["Nom"].Index)
+                && e.Control is ComboBox cb)
             {
-                e.Handled = true;
+                cb.SelectedIndexChanged -= new EventHandler(ArticleChanged);
+                cb.SelectedIndexChanged += new EventHandler(ArticleChanged);
             }
         }
+
+        private void ArticleChanged(object? sender, EventArgs e)
+        {
+            if (sender is not ComboBox cb)
+            {
+                return;
+            }
+
+            int selectedReference = cb.SelectedIndex;
+
+            DataGridViewCellCollection articleRow = dgvPanier.Rows[selectedArticle].Cells;
+
+            articleRow["IDArticle"].Value = fournisseurArticlesList[selectedReference].IDArticle;
+            articleRow["Reference"].Value = fournisseurArticlesList[selectedReference].Reference;
+            articleRow["Nom"].Value = fournisseurArticlesList[selectedReference].Nom;
+            articleRow["Annee"].Value = fournisseurArticlesList[selectedReference].Annee;
+            articleRow["PrixAchat"].Value = fournisseurArticlesList[selectedReference].PrixAchat;
+
+            articleRow["Quantite"].Value = 0;
+
+            CalculArticleTotal(selectedArticle);
+
+            dgvPanier.CurrentCell = articleRow["Quantite"];
+        }
+
+        private void ArticleValide(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvPanier.Columns["Quantite"].Index)
+            {
+                CalculArticleTotal(selectedArticle);
+            }
+        }
+
+        #endregion
+
+        #region Add / Remove Grid lines
 
         private void AddArticleLine(object sender, EventArgs e)
         {
@@ -176,21 +278,54 @@ namespace Gestion_stock.Forms.FormNewItem
 
             this.dgvPanier.Rows.RemoveAt(selectedArticle);
             selectedArticle = -1;
+            CalculCommandeTotal();
         }
+
+        #endregion
+
+        #region Update Data
+        private void CoutTransportChanged(object sender, EventArgs e)
+        {
+            CalculCommandeTotal();
+        }
+
+        #endregion
 
         #endregion
 
         #region Requests
 
+        private IEnumerable<ArticleInfo> GetArticles()
+        {
+            IEnumerable<ArticleInfo> query =
+                from articles in Tables.Articles.AsEnumerable()
+                select new ArticleInfo
+                {
+                    IDFournisseur = Convert.ToString(articles["IDFournisseur"]),
+                    IDArticle = Convert.ToString(articles["IDArticle"]),
+                    Reference = Convert.ToString(articles["Reference"]),
+                    Nom = Convert.ToString(articles["Nom"]),
+                    Annee = Convert.ToString(articles["Annee"]),
+                    PrixAchat = Convert.ToDecimal(articles["PrixAchat"]),
+                };
+            return query;
+        }
+
         #endregion
 
         #region Manage Data
 
-        private void CalculTotal(int rowIndex)
+        private void CalculArticleTotal(int rowIndex)
         {
+            if (rowIndex < 0)
+            {
+                return;
+            }
+
             if (dgvPanier.Rows[rowIndex].Cells["PrixAchat"].Value == null
                 || dgvPanier.Rows[rowIndex].Cells["Quantite"].Value == null)
             {
+                dgvPanier.Rows[rowIndex].Cells["PrixTotal"].Value = 0;
                 return;
             }
 
@@ -205,8 +340,43 @@ namespace Gestion_stock.Forms.FormNewItem
             {
                 return;
             }
+
+            CalculCommandeTotal();
         }
 
+        private void CalculCommandeTotal()
+        {
+            try
+            {
+                decimal.TryParse(txtCoutTransport.Text, out decimal coutTransport);
+
+                decimal totalArticles = dgvPanier.Rows.Cast<DataGridViewRow>().Select(r => Convert.ToDecimal(r.Cells["PrixTotal"].Value)).Sum();
+
+                txtTotalTTC.Text = (coutTransport + totalArticles).ToString();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+        }
+
+        private bool ControlData()
+        {
+            if (txtFournisseur.SelectedIndex < 0)
+            {
+                CustomMethods.DisplayError("Veuillez attribuer la commande à un fournisseur.");
+                return false;
+            }
+
+            if (dgvPanier.Rows.Count < 1)
+            {
+                CustomMethods.DisplayError("Veuillez ajouter des articles à la commande.");
+                return false;
+            }
+
+            return true;
+        }
 
         #endregion
 
@@ -218,7 +388,6 @@ namespace Gestion_stock.Forms.FormNewItem
 
         private class PageInfo
         {
-            public string? IDCommande { get; set; }
             public string? IDFournisseur { get; set; }
             public string? DateCommande { get; set; }
             public string? TypeCommande { get; set; }
@@ -226,15 +395,14 @@ namespace Gestion_stock.Forms.FormNewItem
             public decimal? CoutTransport { get; set; }
         }
 
-        private class GridViewInfo
+        private class ArticleInfo
         {
+            public string? IDFournisseur { get; set; }
             public string? IDArticle { get; set; }
             public string? Reference { get; set; }
             public string? Nom { get; set; }
             public string? Annee { get; set; }
             public decimal? PrixAchat { get; set; }
-            public int? Quantite { get; set; }
-            public decimal? TotalTTC { get; set; }
         }
 
         #endregion

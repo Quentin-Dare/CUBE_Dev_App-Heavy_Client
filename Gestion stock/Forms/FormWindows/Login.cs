@@ -55,7 +55,7 @@ namespace Gestion_stock.MainForm
 
         private void pnlMinimize_Click(object sender, EventArgs e)
         {
-            this.WindowState= FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void lblCloseIcon_MouseEnter(object sender, EventArgs e)

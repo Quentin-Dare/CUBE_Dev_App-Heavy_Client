@@ -177,7 +177,7 @@ namespace Gestion_stock.Forms.FormIndividual
             }
             string? idFournisseur = listeNomFournisseurs[fournisseurIndex].IDFournisseur;
 
-            if(idFournisseur is null)
+            if (idFournisseur is null)
             {
                 CustomMethods.DisplayError("Fournisseur non-défini");
                 return;

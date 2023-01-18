@@ -136,7 +136,6 @@
             this.lbParametres.TabIndex = 6;
             this.lbParametres.Text = "Paramètres";
             this.lbParametres.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbParametres.Visible = false;
             this.lbParametres.Click += new System.EventHandler(this.lbParametres_Click);
             this.lbParametres.MouseEnter += new System.EventHandler(this.OnMouseEnterRed);
             this.lbParametres.MouseLeave += new System.EventHandler(this.OnMouseLeaveRed);

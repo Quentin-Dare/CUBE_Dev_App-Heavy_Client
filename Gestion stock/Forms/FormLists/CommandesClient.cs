@@ -1,6 +1,5 @@
 ﻿using Gestion_stock.Forms.FormIndividual;
 using Gestion_stock.Forms.FormLists.Model;
-using Gestion_stock.Forms.FormNewItem;
 using Gestion_stock.NegosudData;
 using Gestion_stock.Utils.CustomControls;
 using System.Data;
