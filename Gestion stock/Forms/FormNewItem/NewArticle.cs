@@ -90,6 +90,7 @@ namespace Gestion_stock.Forms.FormNewItem
             txtTVA.Text = null;
             txtQuantite.Text = null;
             txtQuantiteMin.Text = null;
+            txtImageLink.Text = null;
         }
 
         /// <summary>
@@ -160,6 +161,7 @@ namespace Gestion_stock.Forms.FormNewItem
 
             // Suppression de la liste des champs qu'on ne veut pas contrôler
             controlsToCheck.Remove(this.txtReference);
+            controlsToCheck.Remove(this.txtImageLink);
 
             // Contrôle des données
             if (!CheckControlsValue(controlsToCheck))
@@ -321,6 +323,7 @@ namespace Gestion_stock.Forms.FormNewItem
             public decimal TVA { get; set; }
             public int Quantite { get; set; }
             public int QuantiteMin { get; set; }
+            public string? ImageLink { get; set; }
         }
 
         #endregion
