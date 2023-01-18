@@ -122,6 +122,7 @@ namespace Gestion_stock.Forms.FormIndividual
             txtTVA.Text = article.TVA.ToString();
             txtQuantite.Text = article.Quantite.ToString();
             txtQuantiteMin.Text = article.QuantiteMin.ToString();
+            txtImageLink.Text = article.ImageLink;
         }
 
         /// <summary>
@@ -214,6 +215,7 @@ namespace Gestion_stock.Forms.FormIndividual
                 TVA = Convert.ToDecimal(articles["TVA"]),
                 Quantite = Convert.ToInt32(articles["Quantite"]),
                 QuantiteMin = Convert.ToInt32(articles["QuantiteMin"]),
+                ImageLink = Convert.ToString(articles["ImageLink"])
             };
 
             return articleInfos.FirstOrDefault();
@@ -236,6 +238,7 @@ namespace Gestion_stock.Forms.FormIndividual
 
             // Suppression de la liste des champs qu'on ne veut pas contrôler
             controlsToCheck.Remove(this.txtReference);
+            controlsToCheck.Remove(this.txtImageLink);
 
             // Contrôle des données
             if (!CheckControlsValue(controlsToCheck))
@@ -298,6 +301,7 @@ namespace Gestion_stock.Forms.FormIndividual
             article.PrixAchat = Convert.ToDecimal(txtPrixAchat.Text);
             article.TVA = Convert.ToDecimal(txtTVA.Text);
             article.Quantite = Convert.ToInt32(txtQuantite.Text);
+            article.ImageLink = Convert.ToString(txtImageLink.Text);
         }
 
         #endregion
@@ -417,6 +421,7 @@ namespace Gestion_stock.Forms.FormIndividual
             public decimal TVA { get; set; }
             public int Quantite { get; set; }
             public int QuantiteMin { get; set; }
+            public string? ImageLink { get; set; }
         }
 
         #endregion

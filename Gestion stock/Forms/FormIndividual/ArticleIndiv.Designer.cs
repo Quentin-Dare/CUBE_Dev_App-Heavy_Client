@@ -61,6 +61,8 @@
             this.txtAnnee = new System.Windows.Forms.TextBox();
             this.tlpContainerAll = new System.Windows.Forms.TableLayoutPanel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lbImageLink = new System.Windows.Forms.Label();
+            this.txtImageLink = new System.Windows.Forms.TextBox();
             this.flpButtons.SuspendLayout();
             this.tlpContainerData.SuspendLayout();
             this.pnlRightData.SuspendLayout();
@@ -80,7 +82,7 @@
             this.lbFormTitle.Location = new System.Drawing.Point(50, 70);
             this.lbFormTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lbFormTitle.Name = "lbFormTitle";
-            this.lbFormTitle.Size = new System.Drawing.Size(900, 51);
+            this.lbFormTitle.Size = new System.Drawing.Size(1383, 62);
             this.lbFormTitle.TabIndex = 0;
             this.lbFormTitle.Text = "Montazac Rouge";
             // 
@@ -95,7 +97,7 @@
             this.flpButtons.Location = new System.Drawing.Point(50, 20);
             this.flpButtons.Margin = new System.Windows.Forms.Padding(0);
             this.flpButtons.Name = "flpButtons";
-            this.flpButtons.Size = new System.Drawing.Size(900, 50);
+            this.flpButtons.Size = new System.Drawing.Size(1383, 50);
             this.flpButtons.TabIndex = 6;
             this.flpButtons.WrapContents = false;
             // 
@@ -105,7 +107,7 @@
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(730, 0);
+            this.btnSave.Location = new System.Drawing.Point(1213, 0);
             this.btnSave.Margin = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(170, 50);
@@ -121,7 +123,7 @@
             this.btnReload.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReload.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnReload.ForeColor = System.Drawing.Color.Black;
-            this.btnReload.Location = new System.Drawing.Point(545, 0);
+            this.btnReload.Location = new System.Drawing.Point(1028, 0);
             this.btnReload.Margin = new System.Windows.Forms.Padding(0);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(170, 50);
@@ -136,7 +138,7 @@
             this.lbNom.AutoSize = true;
             this.lbNom.Location = new System.Drawing.Point(0, 55);
             this.lbNom.Name = "lbNom";
-            this.lbNom.Size = new System.Drawing.Size(46, 19);
+            this.lbNom.Size = new System.Drawing.Size(57, 23);
             this.lbNom.TabIndex = 6;
             this.lbNom.Text = "Nom :";
             // 
@@ -146,7 +148,7 @@
             this.txtNom.Location = new System.Drawing.Point(126, 52);
             this.txtNom.Margin = new System.Windows.Forms.Padding(0);
             this.txtNom.Name = "txtNom";
-            this.txtNom.Size = new System.Drawing.Size(282, 24);
+            this.txtNom.Size = new System.Drawing.Size(282, 29);
             this.txtNom.TabIndex = 7;
             // 
             // lbDomaine
@@ -155,7 +157,7 @@
             this.lbDomaine.Location = new System.Drawing.Point(0, 100);
             this.lbDomaine.Margin = new System.Windows.Forms.Padding(0);
             this.lbDomaine.Name = "lbDomaine";
-            this.lbDomaine.Size = new System.Drawing.Size(71, 19);
+            this.lbDomaine.Size = new System.Drawing.Size(88, 23);
             this.lbDomaine.TabIndex = 8;
             this.lbDomaine.Text = "Domaine :";
             // 
@@ -164,7 +166,7 @@
             this.lbFamilleVin.AutoSize = true;
             this.lbFamilleVin.Location = new System.Drawing.Point(0, 145);
             this.lbFamilleVin.Name = "lbFamilleVin";
-            this.lbFamilleVin.Size = new System.Drawing.Size(99, 19);
+            this.lbFamilleVin.Size = new System.Drawing.Size(122, 23);
             this.lbFamilleVin.TabIndex = 9;
             this.lbFamilleVin.Text = "Famille de vin :";
             // 
@@ -173,7 +175,7 @@
             this.lbAnnee.AutoSize = true;
             this.lbAnnee.Location = new System.Drawing.Point(0, 190);
             this.lbAnnee.Name = "lbAnnee";
-            this.lbAnnee.Size = new System.Drawing.Size(55, 19);
+            this.lbAnnee.Size = new System.Drawing.Size(68, 23);
             this.lbAnnee.TabIndex = 12;
             this.lbAnnee.Text = "Année :";
             // 
@@ -188,12 +190,12 @@
             this.tlpContainerData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpContainerData.Controls.Add(this.pnlRightData, 1, 0);
             this.tlpContainerData.Controls.Add(this.pnlLeftData, 0, 0);
-            this.tlpContainerData.Location = new System.Drawing.Point(50, 141);
+            this.tlpContainerData.Location = new System.Drawing.Point(50, 152);
             this.tlpContainerData.Margin = new System.Windows.Forms.Padding(0);
             this.tlpContainerData.Name = "tlpContainerData";
             this.tlpContainerData.RowCount = 1;
             this.tlpContainerData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContainerData.Size = new System.Drawing.Size(900, 448);
+            this.tlpContainerData.Size = new System.Drawing.Size(1383, 448);
             this.tlpContainerData.TabIndex = 13;
             // 
             // pnlRightData
@@ -211,7 +213,7 @@
             this.pnlRightData.Controls.Add(this.lbTVA);
             this.pnlRightData.Controls.Add(this.lbPrixAchat);
             this.pnlRightData.Controls.Add(this.lbPrixTTC);
-            this.pnlRightData.Location = new System.Drawing.Point(650, 0);
+            this.pnlRightData.Location = new System.Drawing.Point(1133, 0);
             this.pnlRightData.Margin = new System.Windows.Forms.Padding(0);
             this.pnlRightData.Name = "pnlRightData";
             this.pnlRightData.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -225,7 +227,7 @@
             this.txtQuantiteMin.Margin = new System.Windows.Forms.Padding(0);
             this.txtQuantiteMin.Name = "txtQuantiteMin";
             this.txtQuantiteMin.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtQuantiteMin.Size = new System.Drawing.Size(96, 24);
+            this.txtQuantiteMin.Size = new System.Drawing.Size(96, 29);
             this.txtQuantiteMin.TabIndex = 18;
             // 
             // lbQuantiteMin
@@ -233,7 +235,7 @@
             this.lbQuantiteMin.AutoSize = true;
             this.lbQuantiteMin.Location = new System.Drawing.Point(13, 55);
             this.lbQuantiteMin.Name = "lbQuantiteMin";
-            this.lbQuantiteMin.Size = new System.Drawing.Size(118, 19);
+            this.lbQuantiteMin.Size = new System.Drawing.Size(146, 23);
             this.lbQuantiteMin.TabIndex = 19;
             this.lbQuantiteMin.Text = "Quantité requise :";
             // 
@@ -244,7 +246,7 @@
             this.txtQuantite.Margin = new System.Windows.Forms.Padding(0);
             this.txtQuantite.Name = "txtQuantite";
             this.txtQuantite.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtQuantite.Size = new System.Drawing.Size(96, 24);
+            this.txtQuantite.Size = new System.Drawing.Size(96, 29);
             this.txtQuantite.TabIndex = 3;
             // 
             // txtTVA
@@ -254,7 +256,7 @@
             this.txtTVA.Margin = new System.Windows.Forms.Padding(0);
             this.txtTVA.Name = "txtTVA";
             this.txtTVA.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtTVA.Size = new System.Drawing.Size(96, 24);
+            this.txtTVA.Size = new System.Drawing.Size(96, 29);
             this.txtTVA.TabIndex = 2;
             // 
             // txtPrixAchat
@@ -264,7 +266,7 @@
             this.txtPrixAchat.Margin = new System.Windows.Forms.Padding(0);
             this.txtPrixAchat.Name = "txtPrixAchat";
             this.txtPrixAchat.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtPrixAchat.Size = new System.Drawing.Size(96, 24);
+            this.txtPrixAchat.Size = new System.Drawing.Size(96, 29);
             this.txtPrixAchat.TabIndex = 1;
             // 
             // txtPrixTTC
@@ -274,7 +276,7 @@
             this.txtPrixTTC.Margin = new System.Windows.Forms.Padding(0);
             this.txtPrixTTC.Name = "txtPrixTTC";
             this.txtPrixTTC.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtPrixTTC.Size = new System.Drawing.Size(96, 24);
+            this.txtPrixTTC.Size = new System.Drawing.Size(96, 29);
             this.txtPrixTTC.TabIndex = 4;
             // 
             // lbQuantite
@@ -282,7 +284,7 @@
             this.lbQuantite.AutoSize = true;
             this.lbQuantite.Location = new System.Drawing.Point(13, 10);
             this.lbQuantite.Name = "lbQuantite";
-            this.lbQuantite.Size = new System.Drawing.Size(124, 19);
+            this.lbQuantite.Size = new System.Drawing.Size(153, 23);
             this.lbQuantite.TabIndex = 17;
             this.lbQuantite.Text = "Quantité restante :";
             // 
@@ -291,7 +293,7 @@
             this.lbTVA.AutoSize = true;
             this.lbTVA.Location = new System.Drawing.Point(14, 100);
             this.lbTVA.Name = "lbTVA";
-            this.lbTVA.Size = new System.Drawing.Size(63, 19);
+            this.lbTVA.Size = new System.Drawing.Size(78, 23);
             this.lbTVA.TabIndex = 16;
             this.lbTVA.Text = "TVA (%) :";
             // 
@@ -300,7 +302,7 @@
             this.lbPrixAchat.AutoSize = true;
             this.lbPrixAchat.Location = new System.Drawing.Point(13, 145);
             this.lbPrixAchat.Name = "lbPrixAchat";
-            this.lbPrixAchat.Size = new System.Drawing.Size(106, 19);
+            this.lbPrixAchat.Size = new System.Drawing.Size(132, 23);
             this.lbPrixAchat.TabIndex = 15;
             this.lbPrixAchat.Text = "Prix d\'achat (€) :";
             // 
@@ -309,7 +311,7 @@
             this.lbPrixTTC.AutoSize = true;
             this.lbPrixTTC.Location = new System.Drawing.Point(14, 189);
             this.lbPrixTTC.Name = "lbPrixTTC";
-            this.lbPrixTTC.Size = new System.Drawing.Size(84, 19);
+            this.lbPrixTTC.Size = new System.Drawing.Size(104, 23);
             this.lbPrixTTC.TabIndex = 7;
             this.lbPrixTTC.Text = "Prix TTC (€) :";
             // 
@@ -321,6 +323,8 @@
             this.pnlLeftData.AutoScroll = true;
             this.pnlLeftData.AutoSize = true;
             this.pnlLeftData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlLeftData.Controls.Add(this.txtImageLink);
+            this.pnlLeftData.Controls.Add(this.lbImageLink);
             this.pnlLeftData.Controls.Add(this.lkFournisseur);
             this.pnlLeftData.Controls.Add(this.txtFournisseur);
             this.pnlLeftData.Controls.Add(this.txtFamille);
@@ -338,7 +342,7 @@
             this.pnlLeftData.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLeftData.Name = "pnlLeftData";
             this.pnlLeftData.Padding = new System.Windows.Forms.Padding(0, 0, 20, 20);
-            this.pnlLeftData.Size = new System.Drawing.Size(650, 448);
+            this.pnlLeftData.Size = new System.Drawing.Size(1133, 448);
             this.pnlLeftData.TabIndex = 0;
             // 
             // lkFournisseur
@@ -348,8 +352,9 @@
             this.lkFournisseur.LinkColor = System.Drawing.Color.Gray;
             this.lkFournisseur.Location = new System.Drawing.Point(414, 100);
             this.lkFournisseur.Name = "lkFournisseur";
-            this.lkFournisseur.Size = new System.Drawing.Size(157, 19);
+            this.lkFournisseur.Size = new System.Drawing.Size(196, 23);
             this.lkFournisseur.TabIndex = 17;
+            this.lkFournisseur.TabStop = true;
             this.lkFournisseur.Text = "Accéder au fournisseur...";
             this.lkFournisseur.VisitedLinkColor = System.Drawing.Color.Gray;
             this.lkFournisseur.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FournisseurLinkClicked);
@@ -360,7 +365,7 @@
             this.txtFournisseur.FormattingEnabled = true;
             this.txtFournisseur.Location = new System.Drawing.Point(126, 97);
             this.txtFournisseur.Name = "txtFournisseur";
-            this.txtFournisseur.Size = new System.Drawing.Size(282, 25);
+            this.txtFournisseur.Size = new System.Drawing.Size(282, 29);
             this.txtFournisseur.TabIndex = 10;
             // 
             // txtFamille
@@ -369,7 +374,7 @@
             this.txtFamille.FormattingEnabled = true;
             this.txtFamille.Location = new System.Drawing.Point(126, 141);
             this.txtFamille.Name = "txtFamille";
-            this.txtFamille.Size = new System.Drawing.Size(282, 25);
+            this.txtFamille.Size = new System.Drawing.Size(282, 29);
             this.txtFamille.TabIndex = 13;
             // 
             // txtReference
@@ -378,7 +383,7 @@
             this.txtReference.Location = new System.Drawing.Point(126, 7);
             this.txtReference.Margin = new System.Windows.Forms.Padding(0);
             this.txtReference.Name = "txtReference";
-            this.txtReference.Size = new System.Drawing.Size(182, 24);
+            this.txtReference.Size = new System.Drawing.Size(182, 29);
             this.txtReference.TabIndex = 5;
             // 
             // lbReference
@@ -386,7 +391,7 @@
             this.lbReference.AutoSize = true;
             this.lbReference.Location = new System.Drawing.Point(0, 10);
             this.lbReference.Name = "lbReference";
-            this.lbReference.Size = new System.Drawing.Size(75, 19);
+            this.lbReference.Size = new System.Drawing.Size(94, 23);
             this.lbReference.TabIndex = 16;
             this.lbReference.Text = "Référence :";
             // 
@@ -405,7 +410,7 @@
             this.lbDescription.AutoSize = true;
             this.lbDescription.Location = new System.Drawing.Point(0, 235);
             this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(85, 19);
+            this.lbDescription.Size = new System.Drawing.Size(105, 23);
             this.lbDescription.TabIndex = 14;
             this.lbDescription.Text = "Description :";
             // 
@@ -415,7 +420,7 @@
             this.txtAnnee.Location = new System.Drawing.Point(126, 187);
             this.txtAnnee.Name = "txtAnnee";
             this.txtAnnee.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtAnnee.Size = new System.Drawing.Size(83, 24);
+            this.txtAnnee.Size = new System.Drawing.Size(83, 29);
             this.txtAnnee.TabIndex = 13;
             // 
             // tlpContainerAll
@@ -438,7 +443,7 @@
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpContainerAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpContainerAll.Size = new System.Drawing.Size(1000, 609);
+            this.tlpContainerAll.Size = new System.Drawing.Size(1483, 620);
             this.tlpContainerAll.TabIndex = 14;
             // 
             // errorProvider
@@ -446,13 +451,31 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
+            // lbImageLink
+            // 
+            this.lbImageLink.AutoSize = true;
+            this.lbImageLink.Location = new System.Drawing.Point(654, 10);
+            this.lbImageLink.Name = "lbImageLink";
+            this.lbImageLink.Size = new System.Drawing.Size(116, 23);
+            this.lbImageLink.TabIndex = 18;
+            this.lbImageLink.Text = "Lien d\'image :";
+            // 
+            // txtImageLink
+            // 
+            this.txtImageLink.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtImageLink.Location = new System.Drawing.Point(782, 7);
+            this.txtImageLink.Margin = new System.Windows.Forms.Padding(0);
+            this.txtImageLink.Name = "txtImageLink";
+            this.txtImageLink.Size = new System.Drawing.Size(361, 29);
+            this.txtImageLink.TabIndex = 19;
+            // 
             // ArticleIndiv
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(1000, 609);
+            this.ClientSize = new System.Drawing.Size(1504, 609);
             this.Controls.Add(this.tlpContainerAll);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.Gray;
@@ -507,5 +530,7 @@
         private LinkLabel lkFournisseur;
         private TextBox txtQuantiteMin;
         private Label lbQuantiteMin;
+        private TextBox txtImageLink;
+        private Label lbImageLink;
     }
 }

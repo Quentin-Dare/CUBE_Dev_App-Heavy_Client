@@ -26,6 +26,7 @@ namespace Gestion_stock.NegosudData
             articles.Columns.Add("PrixAchat", typeof(decimal));
             articles.Columns.Add("TVA", typeof(decimal));
             articles.Columns.Add("Description", typeof(string));
+            articles.Columns.Add("ImageLink", typeof(string));
             articles.Columns.Add("IDFournisseur", typeof(string));
             articles.Columns.Add("IDFamilleDeVin", typeof(string));
 
@@ -34,9 +35,9 @@ avec un bon goût. Il fait l'unanimité parmi les amateurs de ce vin.
 
 Bref c'est du bon çui-là";
 
-            articles.Rows.Add("V00001", "RefVin1", "Montazac Rouge 2020", 2020, 30, 5, 59.99, 35.84, 20, description, "F00001", "FV00001");
-            articles.Rows.Add("V00002", "RefVin2", "Montazac Rouge 2020", 2020, 30, 5, 34.89, 20.42, 20, null, "F00002", "FV00001");
-            articles.Rows.Add("V00003", "RefVin3", "Montazac Blanc 2021", 2021, 30, 5, 34.89, 25.30, 20, description, "F00002", "FV00002");
+            articles.Rows.Add("V00001", "RefVin1", "Montazac Rouge 2020", 2020, 30, 5, 59.99, 35.84, 20, description,"image.png", "F00001", "FV00001");
+            articles.Rows.Add("V00002", "RefVin2", "Montazac Rouge 2020", 2020, 30, 5, 34.89, 20.42, 20, null, "image.png", "F00002", "FV00001");
+            articles.Rows.Add("V00003", "RefVin3", "Montazac Blanc 2021", 2021, 30, 5, 34.89, 25.30, 20, description, "image.png", "F00002", "FV00002");
 
             return articles;
         }
